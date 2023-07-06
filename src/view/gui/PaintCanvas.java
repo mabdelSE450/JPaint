@@ -30,16 +30,16 @@ public class PaintCanvas extends JComponent {
     		int height = Math.abs(shape.getEndPoint().y - shape.getStartPoint().y);
     		
     		if(shape.getStartPoint().x > shape.getEndPoint().x && shape.getStartPoint().y > shape.getEndPoint().y) {
-    			graphics2d.fillOval(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
+    			graphics2d.fillRect(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
     			}
     		else if(shape.getStartPoint().x > shape.getEndPoint().x && shape.getStartPoint().y < shape.getEndPoint().y) {
-    			graphics2d.fillOval(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
+    			graphics2d.fillRect(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
     			}
     		else if(shape.getStartPoint().x < shape.getEndPoint().x && shape.getStartPoint().y > shape.getEndPoint().y) {
-    			graphics2d.fillOval(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
+    			graphics2d.fillRect(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
     			}
     		else if(shape.getStartPoint().x < shape.getEndPoint().x && shape.getStartPoint().y < shape.getEndPoint().y) {
-    			graphics2d.fillOval(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
+    			graphics2d.fillRect(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
     			}
     		}
 
