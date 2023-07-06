@@ -16,14 +16,13 @@ public class PaintCanvas extends JComponent {
 		this.shapeList = myList;
 	}
 	
-	PaintCanvas paintCanvas;
-		
 	
 	@Override
     public void paint(Graphics g) {
     
+		
         Graphics2D graphics2d = (Graphics2D)g;
-        System.out.println(shapeList.size());
+        
         
         for( JShape shape:shapeList) {
         	graphics2d.setColor(Color.red);
@@ -31,16 +30,16 @@ public class PaintCanvas extends JComponent {
     		int height = Math.abs(shape.getEndPoint().y - shape.getStartPoint().y);
     		
     		if(shape.getStartPoint().x > shape.getEndPoint().x && shape.getStartPoint().y > shape.getEndPoint().y) {
-    			graphics2d.fillRect(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
+    			graphics2d.fillOval(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
     			}
     		else if(shape.getStartPoint().x > shape.getEndPoint().x && shape.getStartPoint().y < shape.getEndPoint().y) {
-    			graphics2d.fillRect(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
+    			graphics2d.fillOval(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
     			}
     		else if(shape.getStartPoint().x < shape.getEndPoint().x && shape.getStartPoint().y > shape.getEndPoint().y) {
-    			graphics2d.fillRect(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
+    			graphics2d.fillOval(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
     			}
     		else if(shape.getStartPoint().x < shape.getEndPoint().x && shape.getStartPoint().y < shape.getEndPoint().y) {
-    			graphics2d.fillRect(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
+    			graphics2d.fillOval(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
     			}
     		}
 

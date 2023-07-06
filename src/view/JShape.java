@@ -2,18 +2,18 @@ package view;
 
 public class JShape implements IShape{
 	
-	Point endPoint;
-	Point startPoint;
+	PointClass endPoint;
+	PointClass startPoint;
 	
-	public JShape(Point startPoint, Point endPoint  ) {
+	public JShape(PointClass startPoint, PointClass endPoint  ) {
 		this.endPoint = endPoint;
 		this.startPoint = startPoint;
 	}
 	
-	public Point getStartPoint() {
+	public PointClass getStartPoint() {
 		return startPoint;
 	}
-	public Point getEndPoint() {
+	public PointClass getEndPoint() {
 		return endPoint;
 	}
 	

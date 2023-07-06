@@ -2,6 +2,6 @@ package view;
 
 public interface IShape {
 	
-	public  Point getEndPoint();
-	public Point getStartPoint();
+	public  PointClass getEndPoint();
+	public  PointClass getStartPoint();
 }
