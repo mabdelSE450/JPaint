@@ -1,6 +1,6 @@
 # JPaint
 JPaint Application for SE450:
-Very simple paint program that enables the drawing of a rectangle shape object on the canvas. Also, it supports undo and redo methods on said shape object. All required functionality for the first check-in work as intended.
+Paint application that allows the drawing of a rectangle, ellipse, and triangle shape of various colors. Shapes also have different shading types along with a primary and secondary color. The application also supports the selecting of shapes, one or many at once, and moving those shapes to desired location on the canvas using the move UI selection. Shapes' move location can also be undone using undo and reverted back using redo. My two design patterns are a strategy pattern and a command pattern. My strategy pattern is used to draw the desired shape. I have 3 classes for each shape. DrawRectangleStrategy, DrawEllipseStrategy, and a DrawTriangleStrategy. These classes implement a draw method Interface, IStrategy, that is used in my JShape class. For my command pattern, I have my CreateShape and MoveShape classes implement an IUndoable Interface. The IUndoable Interface contains the needed undo and redo methods for my CreateShape and MoveShape classes. All required fuctionality for the 2nd check-in works as intended. 
 
 GitHub Repo Link:
 https://github.com/mabdelSE450/JPaint
