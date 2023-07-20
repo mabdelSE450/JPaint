@@ -3,13 +3,10 @@ package controller;
 import java.util.ArrayList;
 
 import model.interfaces.IApplicationState;
-import model.persistence.ApplicationState;
 import view.CommandHistory;
-import view.CreateShape;
 import view.EventName;
 import view.JShape;
-import view.ShapeList;
-import view.UndoCommand;
+import view.MoveShape;
 import view.gui.PaintCanvas;
 import view.interfaces.IUiModule;
 
@@ -17,13 +14,15 @@ public class JPaintController implements IJPaintController {
     private final IUiModule uiModule;
     private final IApplicationState applicationState;
     CommandHistory cmd;
-     
     PaintCanvas paintCanvas;
-
-    public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd) {
+    MoveShape moveShape;
+    ArrayList<JShape> shapeListCopy;
+    
+public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd, MoveShape moveShape) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.cmd = cmd;
+        this.moveShape = moveShape;
        setupEvents();
     }
 
@@ -45,12 +44,21 @@ public class JPaintController implements IJPaintController {
     }
 
     private void undo() {
+    	if(applicationState.getActiveMouseMode().toString().equals("DRAW")) {
     	cmd.undo();
-    	
+    	}
+    	else {
+    		moveShape.undo();
+    	}
     }
 
     private void redo() {
+    	if(applicationState.getActiveMouseMode().toString().equals("DRAW")) {
     	cmd.redo();
+    	}
+    	else {
+    		moveShape.redo();
+    	}
     }
 
     private void copy() {

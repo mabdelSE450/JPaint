@@ -32,12 +32,16 @@ public class ShapeList  implements Iterable<JShape>   {
 	public int size() {
 		return myList.size();
 	}
-	
+
 	public void removeShape(JShape shape) {
 		myList.remove(shape);
 		paintCanvas.repaint();
 		}
 
+	public ArrayList<JShape> getShape() {
+		return shapeList.myList;
+		
+	}
 	@Override
 	public Iterator<JShape> iterator() {
 		return myList.iterator();

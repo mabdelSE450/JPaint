@@ -2,14 +2,14 @@ package main;
 
 
 
-import java.awt.Point;
-
 import controller.JPaintController;
+import model.ShapeColor;
 import model.persistence.ApplicationState;
-import view.Click_Handler;
+import view.ClickHandler;
+
 import view.CommandHistory;
 import view.CreateShape;
-import view.PointClass;
+import view.MoveShape;
 import view.ShapeList;
 import view.gui.Gui;
 import view.gui.GuiWindow;
@@ -27,11 +27,10 @@ public class Main {
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         
-        ApplicationState appState = new ApplicationState(uiModule);
-
-        new JPaintController(uiModule, appState,  cmd);
-        
-        paintCanvas.addMouseListener(new Click_Handler(shapeList, paintCanvas));
+         ApplicationState appState = new ApplicationState(uiModule);
+         MoveShape moveShape = new MoveShape(paintCanvas);
+        new JPaintController(uiModule, appState,  cmd, moveShape);
+        paintCanvas.addMouseListener(new ClickHandler(shapeList, paintCanvas, appState));
         
         
     }

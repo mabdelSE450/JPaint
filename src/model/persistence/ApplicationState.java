@@ -13,11 +13,18 @@ public class ApplicationState implements IApplicationState {
     private final IUiModule uiModule;
     private final IDialogProvider dialogProvider;
 
-    private ShapeType activeShapeType;
-    private ShapeColor activePrimaryColor;
+    private  ShapeType activeShapeType;
+    private  ShapeColor activePrimaryColor;
     private ShapeColor activeSecondaryColor;
     private ShapeShadingType activeShapeShadingType;
     private MouseMode activeMouseMode;
+    
+    
+    
+    
+    
+    
+    
 
     public ApplicationState(IUiModule uiModule) {
         this.uiModule = uiModule;
@@ -27,12 +34,14 @@ public class ApplicationState implements IApplicationState {
 
     @Override
     public void setActiveShape() {
+    	
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
-    }
+        }
 
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
+        
     }
 
     @Override
@@ -43,6 +52,7 @@ public class ApplicationState implements IApplicationState {
     @Override
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
+        
     }
 
     @Override
@@ -72,6 +82,7 @@ public class ApplicationState implements IApplicationState {
 
     @Override
     public MouseMode getActiveMouseMode() {
+    	
         return activeMouseMode;
     }
 
