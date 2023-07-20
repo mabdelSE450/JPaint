@@ -50,11 +50,12 @@ public class ClickHandler extends MouseAdapter{
 		
 		break;
 		case("SELECT"):	
-			ArrayList<JShape> temp = new ArrayList<JShape>();
-		SelectShape selectedShape = new SelectShape();
-		selectedShape.run(startPoint, endPoint);
+		
+		ArrayList<JShape> temp = new ArrayList<JShape>();
+		SelectShape boundingBoxShape = new SelectShape();
+		boundingBoxShape.run(selectedShapeList,startPoint, endPoint);
 		for (JShape shape : shapeList) {
-            if (selectedShape.checkCollision(shape)) {
+            if (boundingBoxShape.checkCollision(shape)) {
             	temp.add(shape);
             	}
             }

@@ -6,14 +6,12 @@ import model.persistence.ApplicationState;
 
 public class SelectShape {
 	
-	
-	
 	SelectedShapeList selectedShapeList = new SelectedShapeList();
 	
 	BoundingBoxShape boundingShape;
 	
 	
-	public void run(PointClass start, PointClass end) {
+	public void run(SelectedShapeList selectedShapeList,PointClass start, PointClass end) {
 		selectedShapeList.clearList();
 		
 		if(start.x > end.x && start.y > end.y ) {
