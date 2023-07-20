@@ -12,7 +12,6 @@ import view.interfaces.IUiModule;
 
 public class JShape implements IPointShape, IShape{
 	private IUiModule uiModule;
-	//ApplicationState appState = new ApplicationState(uiModule);
 	PointClass endPoint;
 	PointClass startPoint;
 	ApplicationState appState;
@@ -22,13 +21,7 @@ public class JShape implements IPointShape, IShape{
 	final ShapeColor secondaryColor;
 	
 	
-//	public JShape(PointClass startPoint, PointClass endPoint, ApplicationState appState) {
-//		this.primaryColor = primaryColor;
-//		this.endPoint = endPoint;
-//		this.startPoint = startPoint;
 
-//	}
-	
 	public JShape(PointClass startPoint, PointClass endPoint, ShapeColor primaryColor, 
 			ShapeType shapeType, ShapeShadingType sst, ShapeColor secondaryColor) {
 	

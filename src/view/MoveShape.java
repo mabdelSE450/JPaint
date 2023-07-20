@@ -21,9 +21,7 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 		boundingBox = new BoundingBoxShape(startPoint, endPoint);
 		 deltaX = boundingBox.getEndPoint().x - boundingBox.getStartPoint().x;
 		 deltaY = boundingBox.getEndPoint().y - boundingBox.getStartPoint().y;
-		 System.out.println("DeltaX and DeltaY for run method");
-		 System.out.println(deltaX);
-			System.out.println(deltaY);
+	
 		for(JShape shape: selectedShapeList) {
 		shape.move(deltaX, deltaY);
 		shapeListCopy.add(shape);
@@ -33,9 +31,6 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 	
 	@Override
 	public void undo() {
-		System.out.println("Deltax and DeltaY for undo method");
-		System.out.println(deltaX);
-		System.out.println(deltaY);
 		for(JShape shape: shapeListCopy) {
 			shape.move(-(deltaX), -(deltaY));
 			paintCanvas.repaint();
@@ -46,9 +41,6 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 
 	@Override
 	public void redo() {
-		System.out.println("DeltaX and DeltaY for redo method");
-		System.out.println(deltaX);
-		System.out.println(deltaY);
 		for(JShape shape: shapeListCopy) {
 			shape.move(deltaX, deltaY);
 			paintCanvas.repaint();
