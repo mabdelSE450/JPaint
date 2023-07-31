@@ -54,9 +54,12 @@ public CreateShape(PaintCanvas paintCanvas, ShapeList shapeList,
 			}
 	shape = new JShape(start, end , appState.getActivePrimaryColor(), appState.getActiveShapeType(), 
 				appState.getActiveShapeShadingType(), appState.getActiveSecondaryColor());
+	//System.out.println(shape.startPoint.x);
+	//System.out.println(shape.endPoint.x);
 		createdShape = shape;
 		cmd.add(this);
 		shapeList.addShape(shape);
+		
 
 		}
 	
@@ -64,12 +67,14 @@ public CreateShape(PaintCanvas paintCanvas, ShapeList shapeList,
 	@Override
 	public void undo() {
 		shapeList.removeShape(createdShape);
+		//paintCanvas.getInstance().repaint();
 		paintCanvas.repaint();
 	}
 
 	@Override
 	public void redo() {
 		shapeList.addShape(createdShape);
+		//paintCanvas.getInstance().repaint();
 		paintCanvas.repaint();
 	}
 	}

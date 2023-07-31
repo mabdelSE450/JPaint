@@ -25,6 +25,7 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 		for(JShape shape: selectedShapeList) {
 		shape.move(deltaX, deltaY);
 		shapeListCopy.add(shape);
+		//paintCanvas.getInstance().repaint();
 		paintCanvas.repaint();
 		}
 }
@@ -33,7 +34,8 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 	public void undo() {
 		for(JShape shape: shapeListCopy) {
 			shape.move(-(deltaX), -(deltaY));
-			paintCanvas.repaint();
+			paintCanvas.getInstance().repaint();
+			//paintCanvas.repaint();
 		}
 	}
 	
@@ -43,7 +45,8 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 	public void redo() {
 		for(JShape shape: shapeListCopy) {
 			shape.move(deltaX, deltaY);
-			paintCanvas.repaint();
+			paintCanvas.getInstance().repaint();
+			//paintCanvas.repaint();
 		}
 		
 	}

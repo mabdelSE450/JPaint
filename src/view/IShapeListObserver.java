@@ -1,5 +1,5 @@
 package view;
 
 public interface IShapeListObserver {
-	public void update();
+	public void update(ShapeList shapeList);
 }

@@ -4,9 +4,14 @@ import java.util.ArrayList;
 
 import model.interfaces.IApplicationState;
 import view.CommandHistory;
+import view.CopiedShape;
+import view.CopiedShapeList;
 import view.EventName;
 import view.JShape;
 import view.MoveShape;
+import view.PasteShape;
+import view.SelectedShapeList;
+import view.ShapeList;
 import view.gui.PaintCanvas;
 import view.interfaces.IUiModule;
 
@@ -17,12 +22,21 @@ public class JPaintController implements IJPaintController {
     PaintCanvas paintCanvas;
     MoveShape moveShape;
     ArrayList<JShape> shapeListCopy;
+    SelectedShapeList selectedShapeList = new SelectedShapeList();
+    //CopiedShape copiedShape = new CopiedShape(selectedShapeList);
+    CopiedShapeList copiedShapeList;
+    ShapeList shapeList = new ShapeList();
+    PasteShape pasteShape;
     
-public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd, MoveShape moveShape) {
+public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd, MoveShape moveShape, SelectedShapeList selectedShapeList, PasteShape pasteShape, CopiedShapeList copiedShapeList) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.cmd = cmd;
         this.moveShape = moveShape;
+        //this.copiedShape = copiedShape;
+        this.selectedShapeList = selectedShapeList;
+        this.pasteShape = pasteShape;
+        this.copiedShapeList = copiedShapeList;
        setupEvents();
     }
 
@@ -62,9 +76,16 @@ public JPaintController(IUiModule uiModule, IApplicationState applicationState, 
     }
 
     private void copy() {
+    	CopiedShape copiedShape = new CopiedShape(selectedShapeList, copiedShapeList);
+    	
+    	copiedShape.run();
+    	
+    	
     }
 
     private void paste() {
+    	
+    	pasteShape.run();
     }
 
     private void delete() {

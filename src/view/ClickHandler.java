@@ -15,6 +15,8 @@ public class ClickHandler extends MouseAdapter{
 	 PointClass startPoint = new PointClass(0,0);
 	 PointClass endPoint = new PointClass(0,0); 
 	 SelectedShapeList selectedShapeList = new SelectedShapeList();
+	 //CopiedShapeList copiedShapeList = new CopiedShapeList();
+	 //CopiedShape copiedShape;
 	PaintCanvas paintCanvas;
 	 int width;
 	int height;
@@ -23,10 +25,11 @@ public class ClickHandler extends MouseAdapter{
 	IUiModule uiModule;
 	 ApplicationState appState = new ApplicationState(uiModule);
 	IUiModule ui;
-	public ClickHandler(ShapeList shapeList, PaintCanvas paintCanvas,  ApplicationState appState ) {
+	public ClickHandler(ShapeList shapeList, PaintCanvas paintCanvas,  ApplicationState appState, SelectedShapeList selectedShapeList ) {
 		this.shapeList = shapeList;
 		this.paintCanvas = paintCanvas;
 		this.appState = appState;
+		this.selectedShapeList = selectedShapeList;
 		
 		
 	}
@@ -52,7 +55,7 @@ public class ClickHandler extends MouseAdapter{
 		case("SELECT"):	
 		
 		ArrayList<JShape> temp = new ArrayList<JShape>();
-		SelectShape boundingBoxShape = new SelectShape();
+		SelectShape boundingBoxShape = new SelectShape(paintCanvas);
 		boundingBoxShape.run(selectedShapeList,startPoint, endPoint);
 		for (JShape shape : shapeList) {
             if (boundingBoxShape.checkCollision(shape)) {
@@ -60,6 +63,9 @@ public class ClickHandler extends MouseAdapter{
             	}
             }
 		selectedShapeList.addAll(temp);
+		//copiedShape = new CopiedShape(selectedShapeList);
+		
+		//copiedShapeList.addAll(temp);
 		break;
 		case("MOVE"):
 			MoveShape moveShape = new MoveShape(paintCanvas);

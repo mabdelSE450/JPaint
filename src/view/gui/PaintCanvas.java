@@ -19,12 +19,17 @@ import view.interfaces.IUiModule;
 
 public class PaintCanvas extends JComponent implements IShapeListObserver {
 	
+	//private static PaintCanvas instance = new PaintCanvas(shapeList);
 	private  IUiModule uiModule;
     private  IDialogProvider dialogProvider;
     public ApplicationState appState = new ApplicationState(uiModule);
 	public static EnumMap<ShapeColor, Color> map = new EnumMap<ShapeColor, Color>(ShapeColor.class);
-	ShapeList shapeList;
-	public PaintCanvas(ShapeList myList) {
+	 static ShapeList shapeList;
+	
+	
+	
+	
+	private PaintCanvas(ShapeList myList) {
 		this.shapeList = myList;
 		
 		map.put(ShapeColor.BLACK, Color.black);
@@ -43,10 +48,17 @@ public class PaintCanvas extends JComponent implements IShapeListObserver {
 		map.put(ShapeColor.GREEN, Color.green);
 		
 	}
-//	public void setAppState(ApplicationState appState) {
-//		this.appState = appState;
-//	}
 
+	private static PaintCanvas instance = new PaintCanvas(shapeList);
+	
+		public static PaintCanvas getInstance() {
+			return instance;
+			//return new PaintCanvas(shapeList);
+		}
+		
+		public static void setShapeList(ShapeList myList) {
+	shapeList = myList;
+		}
 	
 	
 	@Override
@@ -61,7 +73,7 @@ public class PaintCanvas extends JComponent implements IShapeListObserver {
         	
         	shape.draw(graphics2d);
         	
-
+        	
         	
         	
         	//        	 graphics2d.setColor(map.get(shape.primaryColor));
@@ -108,7 +120,8 @@ public class PaintCanvas extends JComponent implements IShapeListObserver {
 
 
 	@Override
-	public void update() {
-		this.repaint();
+	public void update(ShapeList shapeList) {
+		this.shapeList = shapeList;
+		repaint();
 	}
 }

@@ -20,19 +20,23 @@ public class DrawTriangleStrategy implements IStrategy {
 		int nInts = 3;
 		switch(shape.getSST().toString()) {
 		case("FILLED_IN"):
-			graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
+			graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+			//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 			graphics2d.fillPolygon(x, y, nInts);
 			break;
 		case("OUTLINE"):
 			graphics2d.setStroke(new BasicStroke(5));
-			graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
+		graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+			//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 			graphics2d.drawPolygon(x, y, nInts);
 			break;
 		case("OUTLINE_AND_FILLED_IN"):
-			graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
+			graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+			//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 			graphics2d.fillPolygon(x, y, nInts);
 			graphics2d.setStroke(new BasicStroke(5));
-			graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
+			graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+			//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 			graphics2d.drawPolygon(x, y, nInts);
 	}
 
