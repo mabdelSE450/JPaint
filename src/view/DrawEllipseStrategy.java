@@ -73,7 +73,7 @@ public class DrawEllipseStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillOval(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawOval(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
 				//graphics2d.fillOval(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
@@ -83,7 +83,7 @@ public class DrawEllipseStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillOval(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawOval(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
 				//graphics2d.fillOval(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
@@ -93,7 +93,7 @@ public class DrawEllipseStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillOval(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawOval(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
 				//graphics2d.fillOval(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
@@ -103,7 +103,7 @@ public class DrawEllipseStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillOval(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawOval(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
 				//graphics2d.fillOval(shape.getStartPoint().x, shape.getStartPoint().y, width, height);

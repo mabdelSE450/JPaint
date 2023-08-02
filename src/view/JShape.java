@@ -52,7 +52,7 @@ public class JShape implements IPointShape, IShape{
 	public ShapeShadingType getSST() {
 		return sst;
 	}
-	public ShapeColor getSecondayColor() {
+	public ShapeColor getSecondaryColor() {
 		return secondaryColor;
 	}
 	public int getWidth() {

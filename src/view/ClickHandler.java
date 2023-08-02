@@ -53,7 +53,8 @@ public class ClickHandler extends MouseAdapter{
 		
 		break;
 		case("SELECT"):	
-		
+			//System.out.println("ClickHandler shapeList size " + shapeList.size());
+			//System.out.println("ClickHandler selectedShapeList size " + selectedShapeList.getSize());
 		ArrayList<JShape> temp = new ArrayList<JShape>();
 		SelectShape boundingBoxShape = new SelectShape(paintCanvas);
 		boundingBoxShape.run(selectedShapeList,startPoint, endPoint);
@@ -63,8 +64,11 @@ public class ClickHandler extends MouseAdapter{
             	}
             }
 		selectedShapeList.addAll(temp);
-		//copiedShape = new CopiedShape(selectedShapeList);
 		
+		//System.out.println("SelectedList size " + selectedShapeList.getSize());
+		//copiedShape = new CopiedShape(selectedShapeList);
+		//System.out.println("ClickHandler selectedShapeList size " + selectedShapeList.getSize());
+		//System.out.println("ClickHandler shapeList size " + shapeList.size());
 		//copiedShapeList.addAll(temp);
 		break;
 		case("MOVE"):

@@ -6,6 +6,8 @@ import model.interfaces.IApplicationState;
 import view.CommandHistory;
 import view.CopiedShape;
 import view.CopiedShapeList;
+import view.DeleteShape;
+import view.DeletedShapeList;
 import view.EventName;
 import view.JShape;
 import view.MoveShape;
@@ -23,20 +25,21 @@ public class JPaintController implements IJPaintController {
     MoveShape moveShape;
     ArrayList<JShape> shapeListCopy;
     SelectedShapeList selectedShapeList = new SelectedShapeList();
-    //CopiedShape copiedShape = new CopiedShape(selectedShapeList);
     CopiedShapeList copiedShapeList;
     ShapeList shapeList = new ShapeList();
     PasteShape pasteShape;
-    
-public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd, MoveShape moveShape, SelectedShapeList selectedShapeList, PasteShape pasteShape, CopiedShapeList copiedShapeList) {
+    DeleteShape deleteShape;
+    DeletedShapeList deletedShapeList;
+public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd, MoveShape moveShape, SelectedShapeList selectedShapeList, PasteShape pasteShape, CopiedShapeList copiedShapeList, DeleteShape deleteShape, DeletedShapeList deletedShapeList) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.cmd = cmd;
         this.moveShape = moveShape;
-        //this.copiedShape = copiedShape;
         this.selectedShapeList = selectedShapeList;
         this.pasteShape = pasteShape;
         this.copiedShapeList = copiedShapeList;
+        this.deleteShape = deleteShape;
+        this.deletedShapeList = deletedShapeList;
        setupEvents();
     }
 
@@ -61,6 +64,10 @@ public JPaintController(IUiModule uiModule, IApplicationState applicationState, 
     	if(applicationState.getActiveMouseMode().toString().equals("DRAW")) {
     	cmd.undo();
     	}
+    	else if(applicationState.getActiveMouseMode().toString().equals("SELECT")) {
+    		
+    	pasteShape.undo();
+    		}
     	else {
     		moveShape.undo();
     	}
@@ -70,6 +77,10 @@ public JPaintController(IUiModule uiModule, IApplicationState applicationState, 
     	if(applicationState.getActiveMouseMode().toString().equals("DRAW")) {
     	cmd.redo();
     	}
+    	else if(applicationState.getActiveMouseMode().toString().equals("SELECT")) {
+       	pasteShape.redo();
+    		}
+    	
     	else {
     		moveShape.redo();
     	}
@@ -89,6 +100,8 @@ public JPaintController(IUiModule uiModule, IApplicationState applicationState, 
     }
 
     private void delete() {
+    	deleteShape.run();
+    	
     }
 
     private void group() {

@@ -37,6 +37,8 @@ public class SelectedShapeList implements Iterable<JShape>  {
 	public Iterator<JShape> iterator() {
 		return selectedShapeList.iterator();
 	}
+	
+	
 
 	
 

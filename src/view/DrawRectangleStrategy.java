@@ -76,7 +76,7 @@ public class DrawRectangleStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillRect(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawRect(shape.getEndPoint().x, shape.getEndPoint().y, width, height);
 				}
@@ -85,7 +85,7 @@ public class DrawRectangleStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillRect(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawRect(shape.getEndPoint().x, shape.getStartPoint().y, width, height);
 				}
@@ -94,7 +94,7 @@ public class DrawRectangleStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillRect(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawRect(shape.getStartPoint().x, shape.getEndPoint().y, width, height);
 				}
@@ -103,7 +103,7 @@ public class DrawRectangleStrategy implements IStrategy {
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 				graphics2d.fillRect(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
 				graphics2d.setStroke(new BasicStroke(5));
-				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+				graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 				//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 				graphics2d.drawRect(shape.getStartPoint().x, shape.getStartPoint().y, width, height);
 				}

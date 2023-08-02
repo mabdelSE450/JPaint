@@ -114,26 +114,9 @@ public class SelectShape {
 	    		int nInts = 3;
 	    		graphics2d.drawPolygon(x, y, nInts);
 	        }
-	        
-	        
-	        //graphics2d.drawRect(startPoint.x, endPoint.x, newWidth , newHeight );
-	        System.out.println(shape.startPoint.x + "shape startPointX");
-	        System.out.println(shape.endPoint.x + "shape endPointX");
-	        System.out.println(shape.startPoint.y + "shape startPointY");
-	        System.out.println(shape.endPoint.y + "shape endPointY");
-	        System.out.println(shape.getWidth());
-	        System.out.println(shape.getHeight());
-	        System.out.println(startPoint.x + "startPointX");
-	        System.out.println(endPoint.x + "endPointX");
-	        System.out.println(startPoint.y + "startPointY");
-	        System.out.println(endPoint.y + "endPointY");
-	        System.out.println(newWidth);
-	        System.out.println(newHeight);
-			return true;}
+	        return true;}
 		else {
 			return false;
 		}
-		
-}
-	
-}
+		}
+	}

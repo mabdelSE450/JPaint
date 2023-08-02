@@ -35,7 +35,7 @@ public class DrawTriangleStrategy implements IStrategy {
 			//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));
 			graphics2d.fillPolygon(x, y, nInts);
 			graphics2d.setStroke(new BasicStroke(5));
-			graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getPrimaryColor()));
+			graphics2d.setColor(PaintCanvas.getInstance().map.get(shape.getSecondaryColor()));
 			//graphics2d.setColor(PaintCanvas.map.get(shape.getSecondayColor()));
 			graphics2d.drawPolygon(x, y, nInts);
 	}

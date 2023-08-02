@@ -22,7 +22,7 @@ public class ShapeList  implements Iterable<JShape>, IShapeListSubject   {
 	public void addShape(JShape shape) {
 		myList.add(shape);
 		notifyObservers();
-		System.out.println("Notify for add ran");
+		//System.out.println("Notify for add ran");
 		///paintCanvas.repaint();
 		}
 	
@@ -38,28 +38,17 @@ public class ShapeList  implements Iterable<JShape>, IShapeListSubject   {
 	public void removeShape(JShape shape) {
 		myList.remove(shape);
 		notifyObservers();
-		System.out.println("Notfiy for remove ran");
+		//System.out.println("Notfiy for remove ran");
 		//paintCanvas.repaint();
 		}
 
-//	public ArrayList<JShape> getShape() {
-//		return shapeList.myList;
-//		
-//	}
+
 	@Override
 	public Iterator<JShape> iterator() {
 		return myList.iterator();
 	}
 	
-//	public void addObserver(IShapeListObserver observer) {
-//		observers.add(observer);
-//	}
 
-//	private void notifyObserver() {
-//		for(IShapeListObserver observer: observers) {
-//			observer.update(this);
-//		}
-	//}
 	
 	public void addAll(ArrayList<JShape> temp) {
 		this.myList.addAll(temp);
@@ -78,7 +67,11 @@ public class ShapeList  implements Iterable<JShape>, IShapeListSubject   {
 			observer.update(this);
 		}
 	}
-		// TODO Auto-generated method stub
+	
+	public void clearList() {
+		myList.clear();
+	}
+		
 		
 	
 }

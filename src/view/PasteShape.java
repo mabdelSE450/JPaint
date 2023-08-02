@@ -7,72 +7,52 @@ import view.gui.PaintCanvas;
 
 public class PasteShape implements IUndoable {
 
-	
-	//PaintCanvas paintCanvas = new PaintCanvas();
+	ArrayList<JShape> temp = new ArrayList<JShape>();
 	ShapeList shapeList;
 	PaintCanvas paintCanvas;
 	CommandHistory cmd;
 	CopiedShapeList copiedShapeList;
-	
-	public PasteShape(PaintCanvas paintCanvas, ShapeList shapeList, CommandHistory cmd, CopiedShapeList copiedShapeList) {
+	JShape PastedShape;
+	DeletedShapeList deletedShapeList;
+	public PasteShape(PaintCanvas paintCanvas, ShapeList shapeList, CommandHistory cmd, CopiedShapeList copiedShapeList, DeletedShapeList deletedShapeList) {
 		this.cmd = cmd;
 		this.shapeList = shapeList;
 		this.paintCanvas = paintCanvas;
 		this.copiedShapeList = copiedShapeList;
+		this.deletedShapeList = deletedShapeList;
 	}
 	
 	
 	public void run() {
-		ArrayList<JShape> temp = new ArrayList<JShape>();
-
+		deletedShapeList.clearList();
+		temp.clear();
 		for(JShape shape: copiedShapeList) {
 			PointClass startPoint = new PointClass(shape.startPoint.x + 20, shape.startPoint.y + 20);
 		    PointClass endPoint = new PointClass(shape.endPoint.x + 20, shape.endPoint.y + 20);
-			
-
-			
-			
-			  shape = new JShape(startPoint, endPoint, shape.getPrimaryColor(), shape.getShapeType(), 
-					shape.getSST(), shape.getSecondayColor());
-			//shapeList.addShape(shape);
-			temp.add(shape);
-			//paintCanvas.repaint();
-			
+			shape = new JShape(startPoint, endPoint, shape.getPrimaryColor(), shape.getShapeType(), 
+					shape.getSST(), shape.getSecondaryColor());
+			temp.add(shape);	
 		}
 		shapeList.addAll(temp);
 		for (JShape shape: shapeList) {
 		
 			paintCanvas.getInstance().repaint();
-		//paintCanvas.repaint();
 		}
-		
+		copiedShapeList.clearList();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@Override
 	public void undo() {
-		// TODO Auto-generated method stub
-		
+	for (JShape shape:temp) {
+			shapeList.removeShape(shape);
+		}
+
 	}
 
 	@Override
 	public void redo() {
-		// TODO Auto-generated method stub
-		
-	}
-
+		for (JShape shape:temp) {
+			shapeList.addShape(shape);
+		}
+		}
 }
