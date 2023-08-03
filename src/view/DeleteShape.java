@@ -32,13 +32,18 @@ public class DeleteShape implements IUndoable {
 
 	@Override
 	public void undo() {
-		
+		System.out.println("DeleteShape undo method ran");
+		for(JShape shape: deletedShapeList) {
+			shapeList.addShape(shape);
+		}
 		}
 	
 
 	@Override
 	public void redo() {
-		
+		for(JShape shape: deletedShapeList) {
+			shapeList.removeShape(shape);
+		}
 		
 	}
 }

@@ -65,10 +65,15 @@ public JPaintController(IUiModule uiModule, IApplicationState applicationState, 
     	cmd.undo();
     	}
     	else if(applicationState.getActiveMouseMode().toString().equals("SELECT")) {
-    		
+    		if(deletedShapeList.getSize() != 0) {
+    			deleteShape.undo();
+    		}
+    		else {
     	pasteShape.undo();
     		}
+    	}
     	else {
+    		
     		moveShape.undo();
     	}
     }
@@ -78,9 +83,13 @@ public JPaintController(IUiModule uiModule, IApplicationState applicationState, 
     	cmd.redo();
     	}
     	else if(applicationState.getActiveMouseMode().toString().equals("SELECT")) {
+    		if(deletedShapeList.getSize() != 0) {
+    			deleteShape.redo();
+    		}
+    		else {
        	pasteShape.redo();
     		}
-    	
+    	}
     	else {
     		moveShape.redo();
     	}
