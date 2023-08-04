@@ -38,7 +38,7 @@ public class DeleteShape implements IUndoable {
 
 	@Override
 	public void undo() {
-		System.out.println("Undo Stack size " + undoStack.getSize());
+		
     	if(!undoStack.isEmpty()) {
 			
 			JShape shapeToAddBack = undoStack.popShape();
