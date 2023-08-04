@@ -17,6 +17,7 @@ public class MoveShape implements IUndoable  {
 }
 	
 public void run(SelectedShapeList selectedShapeList, PointClass startPoint, PointClass endPoint) {
+	System.out.println("MoveShape run execute ");
 		shapeListCopy.clear();
 		boundingBox = new BoundingBoxShape(startPoint, endPoint);
 		 deltaX = boundingBox.getEndPoint().x - boundingBox.getStartPoint().x;
@@ -34,8 +35,8 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 	public void undo() {
 		for(JShape shape: shapeListCopy) {
 			shape.move(-(deltaX), -(deltaY));
-			paintCanvas.getInstance().repaint();
-			//paintCanvas.repaint();
+			//paintCanvas.getInstance().repaint();
+			paintCanvas.repaint();
 		}
 	}
 	
@@ -45,8 +46,8 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 	public void redo() {
 		for(JShape shape: shapeListCopy) {
 			shape.move(deltaX, deltaY);
-			paintCanvas.getInstance().repaint();
-			//paintCanvas.repaint();
+			//paintCanvas.getInstance().repaint();
+			paintCanvas.repaint();
 		}
 		
 	}

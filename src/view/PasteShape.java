@@ -13,27 +13,32 @@ public class PasteShape implements IUndoable {
 	CommandHistory cmd;
 	CopiedShapeList copiedShapeList;
 	JShape PastedShape;
-	DeletedShapeList deletedShapeList;
-	public PasteShape(PaintCanvas paintCanvas, ShapeList shapeList, CommandHistory cmd, CopiedShapeList copiedShapeList, DeletedShapeList deletedShapeList) {
+	DeletedShapeUndoStack deletedShapeList;
+	DeleteOrPaste deleteOrPaste;
+	public PasteShape(PaintCanvas paintCanvas, ShapeList shapeList, CommandHistory cmd, 
+			CopiedShapeList copiedShapeList, DeletedShapeUndoStack deletedShapeList, DeleteOrPaste deleteOrPaste) {
 		this.cmd = cmd;
 		this.shapeList = shapeList;
 		this.paintCanvas = paintCanvas;
 		this.copiedShapeList = copiedShapeList;
 		this.deletedShapeList = deletedShapeList;
+		this.deleteOrPaste = deleteOrPaste;
 	}
 	
 	
+	//public void run() {
 	public void run() {
-		deletedShapeList.clearList();
+    	deleteOrPaste.setPaste();
 		temp.clear();
 		for(JShape shape: copiedShapeList) {
-			PointClass startPoint = new PointClass(shape.startPoint.x + 20, shape.startPoint.y + 20);
-		    PointClass endPoint = new PointClass(shape.endPoint.x + 20, shape.endPoint.y + 20);
-			shape = new JShape(startPoint, endPoint, shape.getPrimaryColor(), shape.getShapeType(), 
-					shape.getSST(), shape.getSecondaryColor());
-			temp.add(shape);	
+			//System.out.println("ShapeList size " + shapeList.size());
+			//shape.paste(start, end);
+			JShape newShape = shape.paste();
+			temp.add(newShape);	
 		}
 		shapeList.addAll(temp);
+		//System.out.println("ShapeList size " + shapeList.size());
+
 		for (JShape shape: shapeList) {
 		
 			paintCanvas.getInstance().repaint();

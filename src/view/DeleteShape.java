@@ -9,41 +9,58 @@ public class DeleteShape implements IUndoable {
 	SelectedShapeList selectedShapeList;
 	PaintCanvas paintCanvas;
 	ShapeList shapeList;
-	DeletedShapeList deletedShapeList;
+	DeletedShapeUndoStack undoStack;
+	DeletedShapeRedoStack redoStack;
 	PasteShape pasteShape;
-	public DeleteShape(ShapeList shapeList, PaintCanvas paintCanvas, SelectedShapeList selectedShapeList, PasteShape pasteShape) {
+	DeleteOrPaste deleteOrPaste;
+	public DeleteShape(PaintCanvas paintCanvas, SelectedShapeList selectedShapeList, 
+			PasteShape pasteShape, DeletedShapeUndoStack undoStack, DeletedShapeRedoStack redoStack, DeleteOrPaste deleteOrPaste, ShapeList shapeList) {
 		this.paintCanvas = paintCanvas;
 		this.selectedShapeList = selectedShapeList;
 		this.shapeList = shapeList;
 		this.pasteShape = pasteShape;
+		this.undoStack = undoStack;
+		this.redoStack = redoStack;
+		//this.deleteOrPaste = deleteOrPaste;
+		this.deleteOrPaste = deleteOrPaste;
 	}
 	
-	
 	public void run() {
-		deletedShapeList = new DeletedShapeList();
-		for(JShape shape:selectedShapeList) {
-			shapeList.removeShape(shape);
-			deletedShapeList.addShape(shape);
-			
-		}
+    	deleteOrPaste.setDelete();
+				for(JShape shape:selectedShapeList) {
+					shape.delete(shapeList);
+					undoStack.pushShape(shape);
+					}
+				
 		
 	}
 
 
 	@Override
 	public void undo() {
-		System.out.println("DeleteShape undo method ran");
-		for(JShape shape: deletedShapeList) {
-			shapeList.addShape(shape);
-		}
+		System.out.println("Undo Stack size " + undoStack.getSize());
+    	if(!undoStack.isEmpty()) {
+			
+			JShape shapeToAddBack = undoStack.popShape();
+			shapeList.addShape(shapeToAddBack);
+			redoStack.pushShape(shapeToAddBack);
+
+			}
+		
 		}
 	
 
 	@Override
 	public void redo() {
-		for(JShape shape: deletedShapeList) {
-			shapeList.removeShape(shape);
-		}
 		
+
+		if(!redoStack.isEmpty()) {
+			JShape shapeToRemoveAgain = redoStack.popShape();
+			shapeList.removeShape(shapeToRemoveAgain);
+
+		undoStack.pushShape(shapeToRemoveAgain);
 	}
+		
+
+}
 }

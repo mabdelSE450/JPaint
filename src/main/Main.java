@@ -11,8 +11,12 @@ import view.CommandHistory;
 import view.CopiedShape;
 import view.CopiedShapeList;
 import view.CreateShape;
+import view.DeleteOrPaste;
 import view.DeleteShape;
-import view.DeletedShapeList;
+
+import view.DeletedShapeRedoStack;
+import view.DeletedShapeUndoStack;
+import view.JShape;
 import view.MoveShape;
 import view.PasteShape;
 import view.SelectShape;
@@ -27,20 +31,20 @@ import view.interfaces.IUiModule;
 public class Main {
     public static void main(String[] args){
     	ShapeList shapeList = new ShapeList();
-    	
+    	DeleteOrPaste deleteOrPaste = new DeleteOrPaste();
     	SelectedShapeList selectedShapeList = new SelectedShapeList();
     	CopiedShapeList copiedShapeList = new CopiedShapeList();
     	CommandHistory cmd = new CommandHistory();
-    	//PaintCanvas paintCanvas = new PaintCanvas(shapeList);
-    	//PaintCanvas.getInstance();
     	PaintCanvas paintCanvas = PaintCanvas.getInstance();
     	PaintCanvas.setShapeList(shapeList);
     	CreateShape createShape = new CreateShape(paintCanvas, shapeList, cmd);
     	SelectShape selectShape = new SelectShape(paintCanvas);
     	CopiedShape copiedShape = new CopiedShape(selectedShapeList, copiedShapeList);
-    	DeletedShapeList deletedShapeList = new DeletedShapeList();
-    	PasteShape pasteShape = new PasteShape(paintCanvas, shapeList, cmd, copiedShapeList, deletedShapeList);
-    	DeleteShape deleteShape = new DeleteShape(shapeList, paintCanvas, selectedShapeList,pasteShape);
+    	DeletedShapeUndoStack undoStack = new DeletedShapeUndoStack();
+    	DeletedShapeRedoStack redoStack = new DeletedShapeRedoStack();
+    	PasteShape pasteShape = new PasteShape(paintCanvas, shapeList, cmd, copiedShapeList, undoStack, deleteOrPaste);
+    	DeleteShape deleteShape = new DeleteShape( paintCanvas, selectedShapeList,
+    			pasteShape, undoStack, redoStack, deleteOrPaste, shapeList);
     	
     	shapeList.registerObserver(paintCanvas);
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
@@ -48,8 +52,9 @@ public class Main {
         
          ApplicationState appState = new ApplicationState(uiModule);
          MoveShape moveShape = new MoveShape(paintCanvas);
-        new JPaintController(uiModule, appState,  cmd, moveShape, selectedShapeList, pasteShape, copiedShapeList, deleteShape,deletedShapeList);
-       paintCanvas.addMouseListener(new ClickHandler(shapeList, paintCanvas, appState, selectedShapeList));
+         new JPaintController(uiModule, appState,  cmd, moveShape, selectedShapeList, pasteShape, 
+         		copiedShapeList, deleteShape,undoStack, redoStack, deleteOrPaste, shapeList, copiedShape);
+       paintCanvas.addMouseListener(new ClickHandler(shapeList, paintCanvas, appState, selectedShapeList, undoStack, redoStack));
         
         
     }

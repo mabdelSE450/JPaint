@@ -15,8 +15,9 @@ public class ClickHandler extends MouseAdapter{
 	 PointClass startPoint = new PointClass(0,0);
 	 PointClass endPoint = new PointClass(0,0); 
 	 SelectedShapeList selectedShapeList = new SelectedShapeList();
-	 //CopiedShapeList copiedShapeList = new CopiedShapeList();
-	 //CopiedShape copiedShape;
+	 DeletedShapeUndoStack undoStack;
+	DeletedShapeRedoStack redoStack;
+	 
 	PaintCanvas paintCanvas;
 	 int width;
 	int height;
@@ -25,11 +26,14 @@ public class ClickHandler extends MouseAdapter{
 	IUiModule uiModule;
 	 ApplicationState appState = new ApplicationState(uiModule);
 	IUiModule ui;
-	public ClickHandler(ShapeList shapeList, PaintCanvas paintCanvas,  ApplicationState appState, SelectedShapeList selectedShapeList ) {
+	public ClickHandler(ShapeList shapeList, PaintCanvas paintCanvas,  ApplicationState appState, 
+			SelectedShapeList selectedShapeList, DeletedShapeUndoStack undoStack, DeletedShapeRedoStack redoStack) {
 		this.shapeList = shapeList;
 		this.paintCanvas = paintCanvas;
 		this.appState = appState;
 		this.selectedShapeList = selectedShapeList;
+		this.undoStack = undoStack;
+		this.redoStack = redoStack;
 		
 		
 	}
@@ -50,11 +54,12 @@ public class ClickHandler extends MouseAdapter{
 		case("DRAW"):
 		CreateShape createShape = new CreateShape(paintCanvas, shapeList, cmd);
 		createShape.run(startPoint, endPoint, appState);
+		undoStack.clearList();
+		redoStack.clearList();
 		
 		break;
 		case("SELECT"):	
-			//System.out.println("ClickHandler shapeList size " + shapeList.size());
-			//System.out.println("ClickHandler selectedShapeList size " + selectedShapeList.getSize());
+			
 		ArrayList<JShape> temp = new ArrayList<JShape>();
 		SelectShape boundingBoxShape = new SelectShape(paintCanvas);
 		boundingBoxShape.run(selectedShapeList,startPoint, endPoint);
@@ -65,11 +70,7 @@ public class ClickHandler extends MouseAdapter{
             }
 		selectedShapeList.addAll(temp);
 		
-		//System.out.println("SelectedList size " + selectedShapeList.getSize());
-		//copiedShape = new CopiedShape(selectedShapeList);
-		//System.out.println("ClickHandler selectedShapeList size " + selectedShapeList.getSize());
-		//System.out.println("ClickHandler shapeList size " + shapeList.size());
-		//copiedShapeList.addAll(temp);
+		
 		break;
 		case("MOVE"):
 			MoveShape moveShape = new MoveShape(paintCanvas);

@@ -19,7 +19,7 @@ public class JShape implements IPointShape, IShape{
 	final ShapeType shapeType;
 	final ShapeShadingType sst;
 	final ShapeColor secondaryColor;
-	
+	ShapeList shapeList;
 	
 
 	public JShape(PointClass startPoint, PointClass endPoint, ShapeColor primaryColor, 
@@ -34,7 +34,9 @@ public class JShape implements IPointShape, IShape{
 	this.secondaryColor = secondaryColor;
 }
 	
-	
+	public void setShapeList(ShapeList shapeList) {
+		this.shapeList = shapeList;
+	}
 
 	public PointClass getStartPoint() {
 		return startPoint;
@@ -82,8 +84,17 @@ public class JShape implements IPointShape, IShape{
 	}
 
 	@Override
-	public void paste() {
-		// TODO Auto-generated method stub
+	public JShape paste(){
+	//public void paste(PointClass start, PointClass end) {
+//		this.startPoint.x += 20;
+//	    this.startPoint.y += 20;
+//	    this.endPoint.x += 20;
+//	    this.endPoint.y += 20;
+	PointClass startPoint = new PointClass(this.startPoint.x + 20, this.startPoint.y + 20);
+	    PointClass endPoint = new PointClass(this.endPoint.x + 20, this.endPoint.y + 20);
+	    JShape newShape = new JShape(startPoint, endPoint, this.getPrimaryColor(), this.getShapeType(), 
+	                                 this.getSST(), this.getSecondaryColor());
+	    return newShape;
 		
 	}
 
@@ -98,9 +109,8 @@ public class JShape implements IPointShape, IShape{
 	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
+	public void delete(ShapeList shapeList) {
+			shapeList.removeShape(this);	
 	}
 	}
 	
