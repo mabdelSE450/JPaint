@@ -7,6 +7,7 @@ import view.CommandHistory;
 import view.CopiedShape;
 import view.CopiedShapeList;
 import view.CreateGroupShape;
+import view.CreateUngroupedShape;
 import view.DeleteOrPaste;
 import view.DeleteShape;
 
@@ -39,10 +40,11 @@ public class JPaintController implements IJPaintController {
     DeletedShapeRedoStack redoStack;
     DeleteOrPaste deleteOrPaste;
     CreateGroupShape createGroupShape;
+    CreateUngroupedShape createUngroupedShape;
     public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd, 
     		MoveShape moveShape, SelectedShapeList selectedShapeList, PasteShape pasteShape, 
     		CopiedShapeList copiedShapeList, DeleteShape deleteShape, DeletedShapeUndoStack undoStack, 
-    		DeletedShapeRedoStack redoStack, DeleteOrPaste deleteOrPaste, ShapeList shapeList, CopiedShape copiedShape, CreateGroupShape createGroupShape) {
+    		DeletedShapeRedoStack redoStack, DeleteOrPaste deleteOrPaste, ShapeList shapeList, CopiedShape copiedShape, CreateGroupShape createGroupShape, CreateUngroupedShape createUngroupedShape) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.cmd = cmd;
@@ -57,6 +59,7 @@ public class JPaintController implements IJPaintController {
         this.shapeList = shapeList;
         this.copiedShape = copiedShape;
         this.createGroupShape = createGroupShape;
+        this.createUngroupedShape = createUngroupedShape;
         
        setupEvents();
     }
@@ -142,17 +145,12 @@ public class JPaintController implements IJPaintController {
     }
 
     private void group() {
-    	//createGroupShape = new CreateGroupShape(selectedShapeList, shapeList, paintCanvas);
     	createGroupShape.run();
     }
 
     private void ungroup() {
+    	createUngroupedShape.run();
     	
     }
-//    public IUiModule getIUiModule() {
-//    	return uiModule; 
-//    }
-//    public IApplicationState getIApplicationState() {
-//    	return applicationState;
-//    }
+
 }

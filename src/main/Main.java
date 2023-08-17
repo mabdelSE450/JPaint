@@ -13,6 +13,7 @@ import view.CopiedShape;
 import view.CopiedShapeList;
 import view.CreateGroupShape;
 import view.CreateShape;
+import view.CreateUngroupedShape;
 import view.DeleteOrPaste;
 import view.DeleteShape;
 
@@ -42,7 +43,7 @@ public class Main {
     	PaintCanvas paintCanvas = PaintCanvas.getInstance();
     	PaintCanvas.setShapeList(shapeList);
     	CreateShape createShape = new CreateShape(paintCanvas, shapeList, cmd);
-    	SelectShape selectShape = new SelectShape(paintCanvas);
+    	//SelectShape selectShape = new SelectShape(paintCanvas);
     	CopiedShape copiedShape = new CopiedShape(selectedShapeList, copiedShapeList);
     	DeletedShapeUndoStack undoStack = new DeletedShapeUndoStack();
     	DeletedShapeRedoStack redoStack = new DeletedShapeRedoStack();
@@ -51,6 +52,8 @@ public class Main {
     			pasteShape, undoStack, redoStack, shapeList, cmd, deleteOrPaste);
     	GroupShapeTempList groupShapeTempList = new GroupShapeTempList();
     	CreateGroupShape createGroupShape = new CreateGroupShape(selectedShapeList, shapeList, paintCanvas,cmd);
+    	CreateUngroupedShape createUngroupedShape = new CreateUngroupedShape(shapeList, paintCanvas, cmd, selectedShapeList);
+    	SelectShape selectShape = new SelectShape(paintCanvas, createGroupShape);
     	shapeList.registerObserver(paintCanvas);
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
@@ -66,6 +69,7 @@ public class Main {
          builder.setDeleteOrPaste(deleteOrPaste);
          builder.setDeleteShape(deleteShape);
          builder.setCreateGroupShape(createGroupShape);
+         builder.setCreateUngroupedShape(createUngroupedShape);
          builder.setMoveShape(moveShape);
          //builder.setPaintCanvas(paintCanvas);
          builder.setPasteShape(pasteShape);
@@ -75,7 +79,7 @@ public class Main {
          jPaint = builder.getJPaintController(uiModule, appState);
          //new JPaintController(uiModule, appState,  cmd, moveShape, selectedShapeList, pasteShape, 
        //  		copiedShapeList, deleteShape,undoStack, redoStack, deleteOrPaste, shapeList, copiedShape, groupShape);
-       paintCanvas.addMouseListener(new ClickHandler(shapeList, paintCanvas, appState, selectedShapeList, undoStack, redoStack));
+       paintCanvas.addMouseListener(new ClickHandler(shapeList, paintCanvas, appState, selectedShapeList, undoStack, redoStack,createGroupShape));
         
         
     }

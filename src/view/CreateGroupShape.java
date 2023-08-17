@@ -20,6 +20,7 @@ public class CreateGroupShape implements IUndoable{
 	 ArrayList<IShape> temp = new ArrayList<IShape>();
 	 ArrayList<IShape> undoTempList = new ArrayList<IShape>();
 	 CommandHistory cmd;
+	 ArrayList<IShape> createdGroupShapesList = new ArrayList<IShape>();
 	 
 	public CreateGroupShape(SelectedShapeList selectedShapeList, ShapeList shapeList, PaintCanvas paintCanvas,CommandHistory cmd) {
 		this.selectedShapeList = selectedShapeList;
@@ -43,6 +44,7 @@ public class CreateGroupShape implements IUndoable{
 		cmd.add(this);
 		//GroupShape groupShape = new GroupShape(groupShapeTempList);
 		shapeList.addShape(groupShape);
+		createdGroupShapesList.add(groupShape);
 		}
 	
 
@@ -65,6 +67,7 @@ public class CreateGroupShape implements IUndoable{
 			undoTempList.add(shape);
 		//selectedShapeList.removeAll(undoTempList);
 	}
+		createdGroupShapesList.clear();
 		System.out.println("ShapeList size in CreateGroupShape undo " + shapeList.size());
 		
 	}
@@ -81,6 +84,7 @@ public class CreateGroupShape implements IUndoable{
 			//if(shape instanceof GroupShape) {
 			//shapeList.addShape(shape);
 			redoTemp.add(shape);
+			createdGroupShapesList.add(shape);
 			
 		}
 		shapeList.addAll(redoTemp);

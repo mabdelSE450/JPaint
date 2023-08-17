@@ -7,6 +7,7 @@ import view.CommandHistory;
 import view.CopiedShape;
 import view.CopiedShapeList;
 import view.CreateGroupShape;
+import view.CreateUngroupedShape;
 import view.DeleteOrPaste;
 import view.DeleteShape;
 import view.DeletedShapeRedoStack;
@@ -38,6 +39,7 @@ public class JPaintControllerBuilder {
     DeletedShapeRedoStack redoStack;
     DeleteOrPaste deleteOrPaste;
     CreateGroupShape createGroupShape;
+    CreateUngroupedShape createUngroupedShape;
     
 
     public JPaintControllerBuilder setCMD(CommandHistory cmd) {
@@ -47,6 +49,10 @@ public class JPaintControllerBuilder {
     
     public JPaintControllerBuilder setCreateGroupShape(CreateGroupShape createGroupShape) {
     	this.createGroupShape = createGroupShape;
+    	return this;
+    }
+    public JPaintControllerBuilder setCreateUngroupedShape(CreateUngroupedShape createUngroupedShape) {
+    	this.createUngroupedShape = createUngroupedShape;
     	return this;
     }
     
@@ -95,9 +101,7 @@ public class JPaintControllerBuilder {
     	this.deleteOrPaste = deleteOrPaste;
     	return this;
     }
-//    public JPaintControllerBuilder setGroupShape(GroupShape groupShape) {
-//    	this.groupShape = groupShape;
-//    	return this;
+
     
     public JPaintController getJPaintController(IUiModule uiModule, IApplicationState applicationState ) {
     	//return new JPaintController(uiModule,applicationState,cmd,paintCanvas,moveShape, selectedShapeList,
@@ -107,7 +111,7 @@ public class JPaintControllerBuilder {
     	
     	return new JPaintController(uiModule, applicationState,  cmd, moveShape, 
     			selectedShapeList, pasteShape, copiedShapeList, deleteShape, undoStack, 
-    			redoStack, deleteOrPaste, shapeList, copiedShape, createGroupShape);
+    			redoStack, deleteOrPaste, shapeList, copiedShape, createGroupShape, createUngroupedShape);
     }
     
 }

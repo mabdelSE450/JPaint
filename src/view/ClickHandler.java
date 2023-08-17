@@ -18,7 +18,8 @@ public class ClickHandler extends MouseAdapter{
 	 //SelectedShapeList groupShapeSelectedShapeList = new SelectedShapeList();
 	 DeletedShapeUndoStack undoStack;
 	DeletedShapeRedoStack redoStack;
-	 
+	CreateGroupShape createGroupShape; 
+	
 	PaintCanvas paintCanvas;
 	 int width;
 	int height;
@@ -28,14 +29,14 @@ public class ClickHandler extends MouseAdapter{
 	 ApplicationState appState = new ApplicationState(uiModule);
 	IUiModule ui;
 	public ClickHandler(ShapeList shapeList, PaintCanvas paintCanvas,  ApplicationState appState, 
-			SelectedShapeList selectedShapeList, DeletedShapeUndoStack undoStack, DeletedShapeRedoStack redoStack) {
+			SelectedShapeList selectedShapeList, DeletedShapeUndoStack undoStack, DeletedShapeRedoStack redoStack, CreateGroupShape createGroupShape) {
 		this.shapeList = shapeList;
 		this.paintCanvas = paintCanvas;
 		this.appState = appState;
 		this.selectedShapeList = selectedShapeList;
 		this.undoStack = undoStack;
 		this.redoStack = redoStack;
-		
+		this.createGroupShape = createGroupShape;
 		
 		
 	}
@@ -64,7 +65,7 @@ public class ClickHandler extends MouseAdapter{
 			//System.out.println("SelectedShapeList size in clickHandler " + selectedShapeList.getSize());
 		
 			ArrayList<IShape> temp = new ArrayList<IShape>();
-		SelectShape boundingBoxShape = new SelectShape(paintCanvas);
+		SelectShape boundingBoxShape = new SelectShape(paintCanvas, createGroupShape);
 		boundingBoxShape.run(selectedShapeList,startPoint, endPoint);
 		//System.out.println("SelectedShapeList size in clickHandler " + selectedShapeList.getSize());
 		//System.out.println("SHapeList size in clickHandler " + shapeList.size());
