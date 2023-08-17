@@ -12,22 +12,24 @@ public class DeleteShape implements IUndoable {
 	DeletedShapeUndoStack undoStack;
 	DeletedShapeRedoStack redoStack;
 	PasteShape pasteShape;
+	CommandHistory cmd;
 	DeleteOrPaste deleteOrPaste;
 	public DeleteShape(PaintCanvas paintCanvas, SelectedShapeList selectedShapeList, 
-			PasteShape pasteShape, DeletedShapeUndoStack undoStack, DeletedShapeRedoStack redoStack, DeleteOrPaste deleteOrPaste, ShapeList shapeList) {
+			PasteShape pasteShape, DeletedShapeUndoStack undoStack, DeletedShapeRedoStack redoStack, ShapeList shapeList, CommandHistory cmd, DeleteOrPaste deleteOrPaste) {
 		this.paintCanvas = paintCanvas;
 		this.selectedShapeList = selectedShapeList;
 		this.shapeList = shapeList;
 		this.pasteShape = pasteShape;
 		this.undoStack = undoStack;
 		this.redoStack = redoStack;
-		//this.deleteOrPaste = deleteOrPaste;
+		this.cmd = cmd;
 		this.deleteOrPaste = deleteOrPaste;
 	}
 	
 	public void run() {
-    	deleteOrPaste.setDelete();
-				for(JShape shape:selectedShapeList) {
+    		deleteOrPaste.setDelete();
+    			cmd.add(this);
+				for(IShape shape:selectedShapeList) {
 					shape.delete(shapeList);
 					undoStack.pushShape(shape);
 					}
@@ -38,10 +40,10 @@ public class DeleteShape implements IUndoable {
 
 	@Override
 	public void undo() {
-		
+		System.out.println("DeleteShape undo");
     	if(!undoStack.isEmpty()) {
 			
-			JShape shapeToAddBack = undoStack.popShape();
+			IShape shapeToAddBack = undoStack.popShape();
 			shapeList.addShape(shapeToAddBack);
 			redoStack.pushShape(shapeToAddBack);
 
@@ -55,7 +57,7 @@ public class DeleteShape implements IUndoable {
 		
 
 		if(!redoStack.isEmpty()) {
-			JShape shapeToRemoveAgain = redoStack.popShape();
+			IShape shapeToRemoveAgain = redoStack.popShape();
 			shapeList.removeShape(shapeToRemoveAgain);
 
 		undoStack.pushShape(shapeToRemoveAgain);

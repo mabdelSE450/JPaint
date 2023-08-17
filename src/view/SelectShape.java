@@ -12,9 +12,9 @@ import view.gui.PaintCanvas;
 
 public class SelectShape {
 	PaintCanvas paintCanvas;
-	
+	boolean dsp;
 	SelectedShapeList selectedShapeList = new SelectedShapeList();
-	
+	GroupShapeTempList groupShapeTempList = new GroupShapeTempList();
 	BoundingBoxShape boundingShape;
 	
 	Graphics graphics;
@@ -23,8 +23,13 @@ public class SelectShape {
 	 public SelectShape(PaintCanvas paintCanvas) {
 		 this.paintCanvas = paintCanvas;
 	 }
+	 
 	
-	public void run(SelectedShapeList selectedShapeList,PointClass start, PointClass end) {
+	
+	public void run(SelectedShapeList selectedShapeList,PointClass start, PointClass end ) {
+		
+		
+		
 		selectedShapeList.clearList();
 		
 		if(start.x > end.x && start.y > end.y ) {
@@ -57,20 +62,27 @@ public class SelectShape {
 		boundingShape = new BoundingBoxShape(start, end) ;
 
 	}
-	public boolean checkCollision(JShape shape) {
+	public boolean checkCollision(IShape shape) {
 		
 		if(boundingShape.getStartPoint().x < shape.getEndPoint().x && 
 		boundingShape.getEndPoint().x  > shape.getStartPoint().x &&
 		boundingShape.getStartPoint().y < shape.getEndPoint().y &&
 		boundingShape.getEndPoint().y > shape.getStartPoint().y)
 		
-		{   
-			PointClass startPoint = new PointClass(shape.startPoint.x - 3, shape.startPoint.y - 3);
-	    	PointClass endPoint = new PointClass(shape.endPoint.x - 3, shape.endPoint.y - 3);
+		{ 
+			
+//			PointClass startPoint = new PointClass(shape.startPoint.x - 3, shape.startPoint.y - 3);
+//	    	PointClass endPoint = new PointClass(shape.endPoint.x - 3, shape.endPoint.y - 3);
+//	    	int newHeight = shape.getHeight() + 6;
+//	    	int newWidth = shape.getWidth() +6 ;
+			
+			PointClass startPoint = new PointClass(shape.getStartPoint().x - 3, shape.getStartPoint().y - 3);
+	    	PointClass endPoint = new PointClass(shape.getEndPoint().x - 3, shape.getEndPoint().y - 3);
 	    	int newHeight = shape.getHeight() + 6;
 	    	int newWidth = shape.getWidth() +6 ;
 			
-			graphics2d = (Graphics2D) paintCanvas.getGraphics();    
+			graphics2d = (Graphics2D) paintCanvas.getGraphics();
+			//System.out.println("Graphics2d hash code " + graphics2d.hashCode());
 			Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
 	        graphics2d.setStroke(stroke);
 	        graphics2d.setColor(Color.BLACK);
@@ -103,14 +115,23 @@ public class SelectShape {
 	    			}
 	        }
 	        else if(shape.getShapeType().toString().equals("TRIANGLE")) {
+//	        	int[] x  = new int[3];
+//	    		x[0] = shape.startPoint.x - 3;
+//	    		x[1] = shape.endPoint.x + 10;
+//	    		x[2] = shape.startPoint.x - 3;
+//	    		int[] y = new int [3];
+//	    		y[0] = shape.startPoint.y - 6;
+//	    		y[1] = shape.endPoint.y + 3;
+//	    		y[2] = shape.endPoint.y + 3;
+//	    		int nInts = 3;
 	        	int[] x  = new int[3];
-	    		x[0] = shape.startPoint.x - 3;
-	    		x[1] = shape.endPoint.x + 10;
-	    		x[2] = shape.startPoint.x - 3;
+	    		x[0] = shape.getStartPoint().x - 3;
+	    		x[1] = shape.getEndPoint().x + 10;
+	    		x[2] = shape.getStartPoint().x - 3;
 	    		int[] y = new int [3];
-	    		y[0] = shape.startPoint.y - 6;
-	    		y[1] = shape.endPoint.y + 3;
-	    		y[2] = shape.endPoint.y + 3;
+	    		y[0] = shape.getStartPoint().y - 6;
+	    		y[1] = shape.getEndPoint().y + 3;
+	    		y[2] = shape.getEndPoint().y + 3;
 	    		int nInts = 3;
 	    		graphics2d.drawPolygon(x, y, nInts);
 	        }

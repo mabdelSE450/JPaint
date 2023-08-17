@@ -7,7 +7,7 @@ public class DeleteOrPaste {
 	private int paste;
 	public DeleteOrPaste() {
 		delete = 0;
-		paste = 1;
+		paste = 0;
 	}
 	public void setDelete() {
 		delete = 1;

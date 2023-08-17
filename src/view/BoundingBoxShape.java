@@ -4,7 +4,7 @@ public class BoundingBoxShape implements IPointShape {
 
 	PointClass startPoint;
 	PointClass endPoint;
-	JShape shape;
+	ITestGroupShape shape;
 	
 	
 	public BoundingBoxShape(PointClass startPoint, PointClass endPoint) {

@@ -5,23 +5,22 @@ import java.util.Iterator;
 
 import view.gui.PaintCanvas;
 
-public class ShapeList  implements Iterable<IShape>, IShapeListSubject   {
-	
+public class ShapeListTester implements Iterable<JShape>, IShapeListSubject {
 	
 	private ArrayList<IShapeListObserver> observers;
-	private final ArrayList<IShape> myList;
+	private final ArrayList<JShape> myList;
 	//private final ArrayList<Object> groupList;
 	PaintCanvas paintCanvas;
 	
 	
 	
-	public ShapeList() {
-		myList = new ArrayList<IShape>();
+	public ShapeListTester() {
+		myList = new ArrayList<JShape>();
 		observers = new ArrayList<IShapeListObserver>();
 		//groupList = new ArrayList<Object>();
 		}
 	
-	public void addShape(IShape shape) {
+	public void addShape(JShape shape) {
 		myList.add(shape);
 		notifyObservers();
 		//System.out.println("Notify for add ran");
@@ -37,7 +36,7 @@ public class ShapeList  implements Iterable<IShape>, IShapeListSubject   {
 		
 	}
 
-	public void removeShape(IShape shape) {
+	public void removeShape(ITestGroupShape shape) {
 		myList.remove(shape);
 		notifyObservers();
 		//System.out.println("Notfiy for remove ran");
@@ -46,19 +45,16 @@ public class ShapeList  implements Iterable<IShape>, IShapeListSubject   {
 
 
 	@Override
-	public Iterator<IShape> iterator() {
+	public Iterator<JShape> iterator() {
 		return myList.iterator();
 	}
 	
 
 	
-	public void addAll(ArrayList<IShape> temp) {
+	public void addAll(ArrayList<JShape> temp) {
 		this.myList.addAll(temp);
 	}
 
-	public void removeAll(ArrayList<IShape> temp) {
-		this.myList.removeAll(temp);
-	}
 	@Override
 	public void registerObserver(IShapeListObserver observer) {
 		observers.add(observer);
@@ -69,7 +65,7 @@ public class ShapeList  implements Iterable<IShape>, IShapeListSubject   {
 	@Override
 	public void notifyObservers() {
 		for(IShapeListObserver observer: observers) {
-			observer.update(this);
+			//observer.update(this);
 		}
 	}
 	
@@ -79,5 +75,5 @@ public class ShapeList  implements Iterable<IShape>, IShapeListSubject   {
 	
 	
 		
-	
+
 }

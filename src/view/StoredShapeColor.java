@@ -5,18 +5,18 @@ import java.awt.Color;
 import model.ShapeColor;
 
 public class StoredShapeColor {
-	private JShape shape;
+	private ITestGroupShape shape;
 	private ShapeColor shapeColor;
 	private Color color;
 
 	
-	public StoredShapeColor(JShape shape, ShapeColor shapeColor, Color color) {
+	public StoredShapeColor(ITestGroupShape shape, ShapeColor shapeColor, Color color) {
 		this.shape = shape;
 		this.shapeColor = shapeColor;
 		this.color = color;
 	}
 	
-	public JShape getShape() {
+	public ITestGroupShape getShape() {
 		return shape;
 	}
 	public ShapeColor getShapeColor() {

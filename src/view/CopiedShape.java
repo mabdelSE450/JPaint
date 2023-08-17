@@ -14,7 +14,7 @@ public class CopiedShape   {
 	
 	
 	public void run() {
-		for (JShape shape: selectedShapeList) {
+		for (IShape shape: selectedShapeList) {
 			copiedShapeList.addShape(shape);
 		}
 }

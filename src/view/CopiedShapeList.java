@@ -3,20 +3,20 @@ package view;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class CopiedShapeList  implements Iterable<JShape> {
+public class CopiedShapeList  implements Iterable<IShape> {
 
-	public final ArrayList<JShape> copiedShapeList;
+	public final ArrayList<IShape> copiedShapeList;
 	public CopiedShapeList() {
-		copiedShapeList = new ArrayList<JShape>();
+		copiedShapeList = new ArrayList<IShape>();
 	}
 	
-	public void addShape(JShape selectedShape) {
+	public void addShape(IShape selectedShape) {
 		copiedShapeList.add(selectedShape);
 		
 		
 	}
 	
-	public void removeShape(JShape selectedShape) {
+	public void removeShape(IShape selectedShape) {
 		copiedShapeList.remove(selectedShape);
 	}
 	
@@ -26,12 +26,12 @@ public class CopiedShapeList  implements Iterable<JShape> {
 	public int getSize() {
 		return copiedShapeList.size();
 	}
-	public void addAll(ArrayList<JShape> temp) {
+	public void addAll(ArrayList<IShape> temp) {
 		this.copiedShapeList.addAll(temp);
 	}
 
 	@Override
-	public Iterator<JShape> iterator() {
+	public Iterator<IShape> iterator() {
 		return copiedShapeList.iterator();
 	}
 	

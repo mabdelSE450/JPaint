@@ -8,15 +8,16 @@ import view.gui.PaintCanvas;
 public class DrawTriangleStrategy implements IStrategy {
 
 	@Override
-	public void draw(JShape shape, Graphics2D graphics2d) {
+	public void draw(IShape shape, Graphics2D graphics2d) {
 		int[] x  = new int[3];
-		x[0] = shape.startPoint.x;
-		x[1] = shape.endPoint.x;
-		x[2] = shape.startPoint.x;
+		//x[0] = shape.startPoint.x;
+		x[0] = shape.getStartPoint().x;
+		x[1] = shape.getEndPoint().x;
+		x[2] = shape.getStartPoint().x;
 		int[] y = new int [3];
-		y[0] = shape.startPoint.y;
-		y[1] = shape.endPoint.y;
-		y[2] = shape.endPoint.y;
+		y[0] = shape.getStartPoint().y;
+		y[1] = shape.getEndPoint().y;
+		y[2] = shape.getEndPoint().y;
 		int nInts = 3;
 		switch(shape.getSST().toString()) {
 		case("FILLED_IN"):

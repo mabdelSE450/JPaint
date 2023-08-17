@@ -11,6 +11,8 @@ import java.awt.Graphics2D;
 import java.util.EnumMap;
 import java.util.Map;
 import model.persistence.ApplicationState;
+import view.IPointShape;
+import view.IShape;
 import view.IShapeListObserver;
 import view.JShape;
 import view.ShapeList;
@@ -64,11 +66,11 @@ public class PaintCanvas extends JComponent implements IShapeListObserver {
 	@Override
     public void paint(Graphics g) {
     
-		
+		//System.out.println("ShapeList size " + shapeList.size());
         Graphics2D graphics2d = (Graphics2D)g;
         
         
-        for( JShape shape:shapeList) {
+        for( IShape shape:shapeList) {
         	
         	
         	shape.draw(graphics2d);

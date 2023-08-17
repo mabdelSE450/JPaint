@@ -12,7 +12,7 @@ public class DrawRectangleStrategy implements IStrategy {
 
 
 	@Override
-	public void draw(JShape shape, Graphics2D graphics2d) {
+	public void draw(IShape shape, Graphics2D graphics2d) {
 		int width = Math.abs(shape.getEndPoint().x - shape.getStartPoint().x);
 		int height = Math.abs(shape.getEndPoint().y - shape.getStartPoint().y);
 		//graphics2d.setColor(PaintCanvas.map.get(shape.getPrimaryColor()));

@@ -7,10 +7,10 @@ import view.gui.PaintCanvas;
 import view.interfaces.IUiModule;
 
 public class CreateShape  implements IUndoable {
-	JShape shape;
+	//JShape shape;
 	PaintCanvas paintCanvas;
 	ShapeList shapeList;
-	private JShape createdShape;
+	private IShape createdShape;
 	CommandHistory cmd;
 	private IUiModule uiModule;
 	ApplicationState appState = new ApplicationState(uiModule);
@@ -52,7 +52,7 @@ public CreateShape(PaintCanvas paintCanvas, ShapeList shapeList,
 			start.x = end.x;
 			end.x = temp;
 			}
-	shape = new JShape(start, end , appState.getActivePrimaryColor(), appState.getActiveShapeType(), 
+	IShape shape = new JShape(start, end , appState.getActivePrimaryColor(), appState.getActiveShapeType(), 
 				appState.getActiveShapeShadingType(), appState.getActiveSecondaryColor());
 	//System.out.println(shape.startPoint.x);
 	//System.out.println(shape.endPoint.x);

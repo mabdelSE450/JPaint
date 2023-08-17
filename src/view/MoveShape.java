@@ -10,20 +10,22 @@ public class MoveShape implements IUndoable  {
 	PaintCanvas paintCanvas;
 	private static int deltaX;
 	private static int deltaY;
+	CommandHistory cmd;
 	
-	 private static ArrayList<JShape> shapeListCopy = new ArrayList<JShape>();
-	public MoveShape(PaintCanvas paintCanvas) {
+	 private static ArrayList<IShape> shapeListCopy = new ArrayList<IShape>();
+	public MoveShape(PaintCanvas paintCanvas, CommandHistory cmd) {
 		this.paintCanvas = paintCanvas;
+		this.cmd = cmd;
 }
 	
 public void run(SelectedShapeList selectedShapeList, PointClass startPoint, PointClass endPoint) {
-	System.out.println("MoveShape run execute ");
+	
 		shapeListCopy.clear();
 		boundingBox = new BoundingBoxShape(startPoint, endPoint);
 		 deltaX = boundingBox.getEndPoint().x - boundingBox.getStartPoint().x;
 		 deltaY = boundingBox.getEndPoint().y - boundingBox.getStartPoint().y;
-	
-		for(JShape shape: selectedShapeList) {
+		 cmd.add(this);
+		for(IShape shape: selectedShapeList) {
 		shape.move(deltaX, deltaY);
 		shapeListCopy.add(shape);
 		//paintCanvas.getInstance().repaint();
@@ -33,7 +35,7 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 	
 	@Override
 	public void undo() {
-		for(JShape shape: shapeListCopy) {
+		for(IShape shape: shapeListCopy) {
 			shape.move(-(deltaX), -(deltaY));
 			//paintCanvas.getInstance().repaint();
 			paintCanvas.repaint();
@@ -44,7 +46,7 @@ public void run(SelectedShapeList selectedShapeList, PointClass startPoint, Poin
 
 	@Override
 	public void redo() {
-		for(JShape shape: shapeListCopy) {
+		for(IShape shape: shapeListCopy) {
 			shape.move(deltaX, deltaY);
 			//paintCanvas.getInstance().repaint();
 			paintCanvas.repaint();

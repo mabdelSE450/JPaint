@@ -6,13 +6,14 @@ import model.ShapeColor;
 import model.ShapeShadingType;
 import model.ShapeType;
 
-public interface IShape {
-	
-	public PointClass getStartPoint();
-	public PointClass getEndPoint();
+public interface ITestGroupShape {
+
+	PointClass getStartPoint();
+
+	PointClass getEndPoint();
 
 	ShapeColor getPrimaryColor();
-	
+
 	ShapeType getShapeType();
 
 	ShapeShadingType getSST();
@@ -25,11 +26,10 @@ public interface IShape {
 
 	void draw(Graphics2D graphics2d);
 
-	public IShape paste();
+	ITestGroupShape paste();
 
 	void move(int deltaX, int deltaY);
 
 	void delete(ShapeList shapeList);
-	
-	//void addShape(IPointShape shape);
+
 }

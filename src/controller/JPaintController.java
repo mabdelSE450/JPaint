@@ -6,12 +6,14 @@ import model.interfaces.IApplicationState;
 import view.CommandHistory;
 import view.CopiedShape;
 import view.CopiedShapeList;
+import view.CreateGroupShape;
 import view.DeleteOrPaste;
 import view.DeleteShape;
 
 import view.DeletedShapeRedoStack;
 import view.DeletedShapeUndoStack;
 import view.EventName;
+import view.GroupShape;
 import view.JShape;
 import view.MoveShape;
 import view.PasteShape;
@@ -36,10 +38,11 @@ public class JPaintController implements IJPaintController {
     DeletedShapeUndoStack undoStack;
     DeletedShapeRedoStack redoStack;
     DeleteOrPaste deleteOrPaste;
+    CreateGroupShape createGroupShape;
     public JPaintController(IUiModule uiModule, IApplicationState applicationState, CommandHistory cmd, 
     		MoveShape moveShape, SelectedShapeList selectedShapeList, PasteShape pasteShape, 
     		CopiedShapeList copiedShapeList, DeleteShape deleteShape, DeletedShapeUndoStack undoStack, 
-    		DeletedShapeRedoStack redoStack, DeleteOrPaste deleteOrPaste, ShapeList shapeList, CopiedShape copiedShape) {
+    		DeletedShapeRedoStack redoStack, DeleteOrPaste deleteOrPaste, ShapeList shapeList, CopiedShape copiedShape, CreateGroupShape createGroupShape) {
         this.uiModule = uiModule;
         this.applicationState = applicationState;
         this.cmd = cmd;
@@ -53,6 +56,8 @@ public class JPaintController implements IJPaintController {
         this.deleteOrPaste = deleteOrPaste;
         this.shapeList = shapeList;
         this.copiedShape = copiedShape;
+        this.createGroupShape = createGroupShape;
+        
        setupEvents();
     }
 
@@ -78,20 +83,27 @@ public class JPaintController implements IJPaintController {
     	cmd.undo();
     	}
     	else if(applicationState.getActiveMouseMode().toString().equals("SELECT")) {
+    		//cmd.undo();
     		if(deleteOrPaste.checkDelete() ==1) {
     			deleteShape.undo();
     		}
-    		else {
+    		else if(deleteOrPaste.checkPaste() == 1) {
     	pasteShape.undo();
+    		}
+    		else {
+    			cmd.undo();
     		}
     	}
     	else {
     		
     		moveShape.undo();
     	}
+    	
+    	
     }
 
     private void redo() {
+    	//cmd.redo();
     	if(applicationState.getActiveMouseMode().toString().equals("DRAW")) {
     	cmd.redo();
     	}
@@ -99,8 +111,11 @@ public class JPaintController implements IJPaintController {
     		if(deleteOrPaste.checkDelete() ==1) {
     			deleteShape.redo();
     		}
-    		else {
+    		else if (deleteOrPaste.checkPaste() == 1) {
        	pasteShape.redo();
+    		}
+    		else {
+    			cmd.redo();
     		}
     	}
     	else {
@@ -118,7 +133,7 @@ public class JPaintController implements IJPaintController {
 
     private void paste() {
     	
-    	pasteShape.run();
+    	pasteShape.run(createGroupShape);
     }
 
     private void delete() {
@@ -127,8 +142,17 @@ public class JPaintController implements IJPaintController {
     }
 
     private void group() {
+    	//createGroupShape = new CreateGroupShape(selectedShapeList, shapeList, paintCanvas);
+    	createGroupShape.run();
     }
 
     private void ungroup() {
+    	
     }
+//    public IUiModule getIUiModule() {
+//    	return uiModule; 
+//    }
+//    public IApplicationState getIApplicationState() {
+//    	return applicationState;
+//    }
 }

@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
-public class DeletedShapeRedoStack implements Iterable<JShape> {
+public class DeletedShapeRedoStack implements Iterable<IShape> {
 	
 	
-	public final Stack<JShape> deletedShapeList;
+	public final Stack<IShape> deletedShapeList;
 	public DeletedShapeRedoStack() {
 		//deletedShapeList = new ArrayList<JShape>();
-		deletedShapeList = new Stack<JShape>();
+		deletedShapeList = new Stack<IShape>();
 	}
 	
-	public void pushShape(JShape selectedShape) {
+	public void pushShape(IShape selectedShape) {
 		//deletedShapeList.add(selectedShape);
 		deletedShapeList.push(selectedShape);
 		
 		
 	}
 	
-	public JShape popShape() {
+	public IShape popShape() {
 		//deletedShapeList.remove(selectedShape);
 		  return deletedShapeList.pop();
 	}
@@ -38,7 +38,7 @@ public class DeletedShapeRedoStack implements Iterable<JShape> {
 	}
 
 	@Override
-	public Iterator<JShape> iterator() {
+	public Iterator<IShape> iterator() {
 		return deletedShapeList.iterator();
 		
 	}

@@ -11,10 +11,11 @@ import view.gui.PaintCanvas;
 import view.interfaces.IUiModule;
 
 public class ClickHandler extends MouseAdapter{
-	ArrayList<JShape> shapeListCopy = new ArrayList<JShape>();
+	SelectShape selectShape;
 	 PointClass startPoint = new PointClass(0,0);
 	 PointClass endPoint = new PointClass(0,0); 
 	 SelectedShapeList selectedShapeList = new SelectedShapeList();
+	 //SelectedShapeList groupShapeSelectedShapeList = new SelectedShapeList();
 	 DeletedShapeUndoStack undoStack;
 	DeletedShapeRedoStack redoStack;
 	 
@@ -36,6 +37,7 @@ public class ClickHandler extends MouseAdapter{
 		this.redoStack = redoStack;
 		
 		
+		
 	}
 	
 
@@ -54,26 +56,33 @@ public class ClickHandler extends MouseAdapter{
 		case("DRAW"):
 		CreateShape createShape = new CreateShape(paintCanvas, shapeList, cmd);
 		createShape.run(startPoint, endPoint, appState);
-		undoStack.clearList();
-		redoStack.clearList();
+		//undoStack.clearList();
+		//redoStack.clearList();
 		
 		break;
 		case("SELECT"):	
-			
-		ArrayList<JShape> temp = new ArrayList<JShape>();
+			//System.out.println("SelectedShapeList size in clickHandler " + selectedShapeList.getSize());
+		
+			ArrayList<IShape> temp = new ArrayList<IShape>();
 		SelectShape boundingBoxShape = new SelectShape(paintCanvas);
 		boundingBoxShape.run(selectedShapeList,startPoint, endPoint);
-		for (JShape shape : shapeList) {
+		//System.out.println("SelectedShapeList size in clickHandler " + selectedShapeList.getSize());
+		//System.out.println("SHapeList size in clickHandler " + shapeList.size());
+		//for (JShape shape : shapeList) {
+		for(IShape shape: shapeList) {
             if (boundingBoxShape.checkCollision(shape)) {
             	temp.add(shape);
+            	//undoStack.clearList();
+            	//redoStack.clearList();
             	}
             }
 		selectedShapeList.addAll(temp);
-		
+		//groupShapeSelectedShapeList.addAll(temp);
 		
 		break;
 		case("MOVE"):
-			MoveShape moveShape = new MoveShape(paintCanvas);
+			
+			MoveShape moveShape = new MoveShape(paintCanvas, cmd);
 			moveShape.run(selectedShapeList, startPoint, endPoint);
 			break;
 			}

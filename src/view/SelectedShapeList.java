@@ -6,20 +6,20 @@ import java.util.Iterator;
 
 import model.persistence.ApplicationState;
 
-public class SelectedShapeList implements Iterable<JShape>  {
+public class SelectedShapeList implements Iterable<IShape>  {
 	
-	public final ArrayList<JShape> selectedShapeList;
+	public final ArrayList<IShape> selectedShapeList;
 	public SelectedShapeList() {
-		selectedShapeList = new ArrayList<JShape>();
+		selectedShapeList = new ArrayList<IShape>();
 	}
 	
-	public void addShape(JShape selectedShape) {
+	public void addShape(IShape selectedShape) {
 		selectedShapeList.add(selectedShape);
 		
 		
 	}
 	
-	public void removeShape(JShape selectedShape) {
+	public void removeShape(IShape selectedShape) {
 		selectedShapeList.remove(selectedShape);
 	}
 	
@@ -29,12 +29,15 @@ public class SelectedShapeList implements Iterable<JShape>  {
 	public int getSize() {
 		return selectedShapeList.size();
 	}
-	public void addAll(ArrayList<JShape> temp) {
+	public void addAll(ArrayList<IShape> temp) {
 		this.selectedShapeList.addAll(temp);
+	}
+	public void removeAll(ArrayList<IShape> temp) {
+		this.selectedShapeList.removeAll(temp);
 	}
 
 	@Override
-	public Iterator<JShape> iterator() {
+	public Iterator<IShape> iterator() {
 		return selectedShapeList.iterator();
 	}
 	

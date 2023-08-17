@@ -2,17 +2,18 @@ package view;
 
 import java.util.ArrayList;
 
+import model.interfaces.IApplicationState;
 import model.persistence.ApplicationState;
 import view.gui.PaintCanvas;
 
 public class PasteShape implements IUndoable {
 
-	ArrayList<JShape> temp = new ArrayList<JShape>();
+	ArrayList<IShape> temp = new ArrayList<IShape>();
 	ShapeList shapeList;
 	PaintCanvas paintCanvas;
 	CommandHistory cmd;
 	CopiedShapeList copiedShapeList;
-	JShape PastedShape;
+	ITestGroupShape PastedShape;
 	DeletedShapeUndoStack deletedShapeList;
 	DeleteOrPaste deleteOrPaste;
 	public PasteShape(PaintCanvas paintCanvas, ShapeList shapeList, CommandHistory cmd, 
@@ -27,19 +28,21 @@ public class PasteShape implements IUndoable {
 	
 	
 	//public void run() {
-	public void run() {
+	public void run(CreateGroupShape createGroupShape) {
+		createGroupShape.groupedOrNot = false;
     	deleteOrPaste.setPaste();
 		temp.clear();
-		for(JShape shape: copiedShapeList) {
-			//System.out.println("ShapeList size " + shapeList.size());
-			//shape.paste(start, end);
-			JShape newShape = shape.paste();
-			temp.add(newShape);	
+		cmd.add(this);
+		System.out.println("CopiedSHapeList size " + copiedShapeList.getSize());
+		for(IShape shape: copiedShapeList) {
+			IShape newshape =  shape.paste();
+			temp.add(newshape);	
 		}
 		shapeList.addAll(temp);
+		
 		//System.out.println("ShapeList size " + shapeList.size());
 
-		for (JShape shape: shapeList) {
+		for (IShape shape: shapeList) {
 		
 			paintCanvas.getInstance().repaint();
 		}
@@ -48,7 +51,8 @@ public class PasteShape implements IUndoable {
 	
 	@Override
 	public void undo() {
-	for (JShape shape:temp) {
+		System.out.println("Paste method undo");
+	for (IShape shape:temp) {
 			shapeList.removeShape(shape);
 		}
 
@@ -56,7 +60,7 @@ public class PasteShape implements IUndoable {
 
 	@Override
 	public void redo() {
-		for (JShape shape:temp) {
+		for (IShape shape:temp) {
 			shapeList.addShape(shape);
 		}
 		}

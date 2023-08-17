@@ -10,16 +10,16 @@ import model.ShapeType;
 import model.persistence.ApplicationState;
 import view.interfaces.IUiModule;
 
-public class JShape implements IPointShape, IShape{
-	private IUiModule uiModule;
+public class JShape implements IPointShape, IShape {
+	//private IUiModule uiModule;
 	PointClass endPoint;
 	PointClass startPoint;
-	ApplicationState appState;
+	//ApplicationState appState;
 	final ShapeColor primaryColor;
 	final ShapeType shapeType;
 	final ShapeShadingType sst;
 	final ShapeColor secondaryColor;
-	ShapeList shapeList;
+	//ShapeList shapeList;
 	
 
 	public JShape(PointClass startPoint, PointClass endPoint, ShapeColor primaryColor, 
@@ -34,32 +34,40 @@ public class JShape implements IPointShape, IShape{
 	this.secondaryColor = secondaryColor;
 }
 	
-	public void setShapeList(ShapeList shapeList) {
-		this.shapeList = shapeList;
-	}
+//	public void setShapeList(ShapeList shapeList) {
+//		this.shapeList = shapeList;
+//	}
 
+	@Override
 	public PointClass getStartPoint() {
 		return startPoint;
 	}
+	@Override
 	public PointClass getEndPoint() {
 		return endPoint;
 	}
+	@Override
 	public  ShapeColor getPrimaryColor() {
 		
 		return  primaryColor;
 		}
+	@Override
 	public ShapeType getShapeType() {
 		return shapeType;
 	}
+	@Override
 	public ShapeShadingType getSST() {
 		return sst;
 	}
+	@Override
 	public ShapeColor getSecondaryColor() {
 		return secondaryColor;
 	}
+	@Override
 	public int getWidth() {
 		return Math.abs(this.getEndPoint().x - this.getStartPoint().x);
 	}
+	@Override
 	public int getHeight() {
 		return Math.abs(this.getEndPoint().y - this.getStartPoint().y);
 	}
@@ -83,20 +91,21 @@ public class JShape implements IPointShape, IShape{
 		}
 	}
 
-	@Override
-	public JShape paste(){
-	//public void paste(PointClass start, PointClass end) {
-//		this.startPoint.x += 20;
-//	    this.startPoint.y += 20;
-//	    this.endPoint.x += 20;
-//	    this.endPoint.y += 20;
-	PointClass startPoint = new PointClass(this.startPoint.x + 20, this.startPoint.y + 20);
-	    PointClass endPoint = new PointClass(this.endPoint.x + 20, this.endPoint.y + 20);
-	    JShape newShape = new JShape(startPoint, endPoint, this.getPrimaryColor(), this.getShapeType(), 
-	                                 this.getSST(), this.getSecondaryColor());
-	    return newShape;
-		
-	}
+//	@Override
+//	public IPointShape paste(){
+//	//public void paste(PointClass start, PointClass end) {
+////		this.startPoint.x += 20;
+////	    this.startPoint.y += 20;
+////	    this.endPoint.x += 20;
+////	    this.endPoint.y += 20;
+////	PointClass startPoint = new PointClass(this.startPoint.x + 20, this.startPoint.y + 20);
+////	    PointClass endPoint = new PointClass(this.endPoint.x + 20, this.endPoint.y + 20);
+////	    IPointShape newShape = new IPointShape(startPoint, endPoint, this.getPrimaryColor(), this.getShapeType(), 
+////	                                 this.getSST(), this.getSecondaryColor());
+////	    return newShape;
+//		
+//		
+//	}
 
 	@Override
 	public void move(int deltaX, int deltaY) {
@@ -110,8 +119,23 @@ public class JShape implements IPointShape, IShape{
 
 	@Override
 	public void delete(ShapeList shapeList) {
-			shapeList.removeShape(this);	
+			shapeList.removeShape(this);
+			System.out.println("JShape delete method");
 	}
+
+	@Override
+	public IShape paste() {
+		
+		PointClass startPoint = new PointClass(this.startPoint.x + 20, this.startPoint.y + 20);
+		PointClass endPoint = new PointClass(this.endPoint.x + 20, this.endPoint.y + 20);
+		IShape newShape = new JShape(startPoint, endPoint, this.getPrimaryColor(), this.getShapeType(), 
+            this.getSST(), this.getSecondaryColor());
+		return newShape;
+	}
+
+	
+
+	
 	}
 	
 
