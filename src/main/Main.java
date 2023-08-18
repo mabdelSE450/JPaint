@@ -53,7 +53,8 @@ public class Main {
     	GroupShapeTempList groupShapeTempList = new GroupShapeTempList();
     	CreateGroupShape createGroupShape = new CreateGroupShape(selectedShapeList, shapeList, paintCanvas,cmd);
     	CreateUngroupedShape createUngroupedShape = new CreateUngroupedShape(shapeList, paintCanvas, cmd, selectedShapeList);
-    	SelectShape selectShape = new SelectShape(paintCanvas, createGroupShape);
+    	//SelectShape selectShape = new SelectShape(paintCanvas, createGroupShape);
+    	SelectShape selectShape = new SelectShape(paintCanvas);
     	shapeList.registerObserver(paintCanvas);
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);

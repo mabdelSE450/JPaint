@@ -29,6 +29,7 @@ public class DeleteShape implements IUndoable {
 	public void run() {
     		deleteOrPaste.setDelete();
     			cmd.add(this);
+    			
 				for(IShape shape:selectedShapeList) {
 					shape.delete(shapeList);
 					undoStack.pushShape(shape);

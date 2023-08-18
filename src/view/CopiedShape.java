@@ -14,6 +14,7 @@ public class CopiedShape   {
 	
 	
 	public void run() {
+		System.out.println("SelectedShapeList size in CopiedShape " + selectedShapeList.getSize());
 		for (IShape shape: selectedShapeList) {
 			copiedShapeList.addShape(shape);
 		}

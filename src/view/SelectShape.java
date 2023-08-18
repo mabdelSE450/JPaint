@@ -16,14 +16,15 @@ public class SelectShape {
 	SelectedShapeList selectedShapeList = new SelectedShapeList();
 	GroupShapeTempList groupShapeTempList = new GroupShapeTempList();
 	BoundingBoxShape boundingShape;
-	CreateGroupShape createGroupShape;
+	//CommandHistory cmd;
 	
 	Graphics graphics;
 	 Graphics2D graphics2d = (Graphics2D)graphics;
 	 
-	 public SelectShape(PaintCanvas paintCanvas, CreateGroupShape createGroupShape) {
+	 public SelectShape(PaintCanvas paintCanvas) {
 		 this.paintCanvas = paintCanvas;
-		 this.createGroupShape = createGroupShape;
+		// this.createGroupShape = createGroupShape
+		 
 	 }
 	 
 	
@@ -62,7 +63,7 @@ public class SelectShape {
 			
 		}
 		boundingShape = new BoundingBoxShape(start, end) ;
-
+		
 	}
 	public boolean checkCollision(IShape shape) {
 		
@@ -83,22 +84,22 @@ public class SelectShape {
 			Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
 	        graphics2d.setStroke(stroke);
 	        graphics2d.setColor(Color.BLACK);
-//	        if(createGroupShape.createdGroupShapesList.size() != 0) {
-//	        	if(startPoint.x > endPoint.x && startPoint.y > endPoint.y) {
-//	    			graphics2d.drawRect(endPoint.x, endPoint.y, newWidth, newHeight);
-//	    			}
-//	    		else if(startPoint.x> endPoint.x && startPoint.y < endPoint.y) {
-//	    			graphics2d.drawRect(endPoint.x, startPoint.y, newWidth, newHeight);
-//	    			}
-//	    		else if(startPoint.x < endPoint.x && startPoint.y > endPoint.y) {
-//	    			graphics2d.drawRect(startPoint.x, endPoint.y, newWidth, newHeight);
-//	    			}
-//	    		else if(startPoint.x < endPoint.x && startPoint.y < endPoint.y) {
-//	    			graphics2d.drawRect(startPoint.x, startPoint.y, newWidth, newHeight);
-//	    			}
-	        	
+	        if(shape instanceof GroupShape) {
+	        	if(startPoint.x > endPoint.x && startPoint.y > endPoint.y) {
+	    			graphics2d.drawRect(endPoint.x, endPoint.y, newWidth, newHeight);
+	    			}
+	    		else if(startPoint.x> endPoint.x && startPoint.y < endPoint.y) {
+	    			graphics2d.drawRect(endPoint.x, startPoint.y, newWidth, newHeight);
+	    			}
+	    		else if(startPoint.x < endPoint.x && startPoint.y > endPoint.y) {
+	    			graphics2d.drawRect(startPoint.x, endPoint.y, newWidth, newHeight);
+	    			}
+	    		else if(startPoint.x < endPoint.x && startPoint.y < endPoint.y) {
+	    			graphics2d.drawRect(startPoint.x, startPoint.y, newWidth, newHeight);
+	    			}
+	        }
 	        
-	         if(shape.getShapeType().toString().equals("RECTANGLE")) {
+	        else if(shape.getShapeType().toString().equals("RECTANGLE")) {
 	        if(startPoint.x > endPoint.x && startPoint.y > endPoint.y) {
     			graphics2d.drawRect(endPoint.x, endPoint.y, newWidth, newHeight);
     			}
@@ -153,3 +154,4 @@ public class SelectShape {
 		}
 		}
 	}
+

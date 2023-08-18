@@ -35,45 +35,53 @@ public class CreateGroupShape implements IUndoable{
 		groupedOrNot = true;
 		//System.out.println("selectedShapeList size in CreateGroupShape first " + selectedShapeList.getSize());
 		for(IShape shape: selectedShapeList) {
+			
 			shapeList.removeShape(shape);
 //			IShape groupShape = new GroupShape(shape.getStartPoint(), shape.getEndPoint(), shape.getPrimaryColor(),
 //					shape.getShapeType(), shape.getSST(), shape.getSecondaryColor());
 			//shapeList.addShape(groupShape);
 	}	
-		GroupShape groupShape = new GroupShape(selectedShapeList, this);
+		//GroupShape groupShape = new GroupShape(selectedShapeList);
+		GroupShape groupShape = new GroupShape(selectedShapeList.selectedShapeList);
 		cmd.add(this);
 		//GroupShape groupShape = new GroupShape(groupShapeTempList);
 		shapeList.addShape(groupShape);
 		createdGroupShapesList.add(groupShape);
+		
 		}
 	
 
 	@Override
 	public void undo() {
 		for(IShape shape: shapeList) {
+			//System.out.println("ShapeList size in CreateGroupShape undo " + shapeList.size());
 //			System.out.println("GroupSHape startX " + shape.getStartPoint().x);
 //	    	System.out.println("GroupSHape starty " + shape.getStartPoint().y);
 //	    	System.out.println("GroupSHape endX " + shape.getEndPoint().x);
 //	    	System.out.println("GroupSHape endX " + shape.getEndPoint().y);
 //	    	System.out.println("GroupSHape height " + shape.getHeight());
 //	    	System.out.println("GroupSHape width " + shape.getWidth());
-			if(shape instanceof GroupShape) {
+		//	if(shape instanceof GroupShape) {
 				temp.add(shape);
-			}
+			//}
 		}
 		shapeList.removeAll(temp);
+		System.out.println("SelectedShapeList in undo of CreateGroupSHape " + selectedShapeList.getSize());
 		for(IShape shape: selectedShapeList) {
 			shapeList.addShape(shape);
 			undoTempList.add(shape);
 		//selectedShapeList.removeAll(undoTempList);
 	}
+			
 		createdGroupShapesList.clear();
 		System.out.println("ShapeList size in CreateGroupShape undo " + shapeList.size());
 		
 	}
+	
 
 	@Override
 	public void redo() {
+		System.out.println("ShapeList size in CreateGroupShape undo " + shapeList.size());
 		ArrayList<IShape> redoTemp = new ArrayList<IShape>();
 		for(IShape shape: undoTempList) {
 			//if(shape instanceof JShape) {

@@ -29,21 +29,27 @@ public class PasteShape implements IUndoable {
 	
 	//public void run() {
 	public void run(CreateGroupShape createGroupShape) {
-		createGroupShape.groupedOrNot = false;
+		//createGroupShape.groupedOrNot = false;
     	deleteOrPaste.setPaste();
 		temp.clear();
 		cmd.add(this);
 		System.out.println("CopiedSHapeList size " + copiedShapeList.getSize());
 		for(IShape shape: copiedShapeList) {
+			//if(shape instanceof JShape) {
 			IShape newshape =  shape.paste();
 			temp.add(newshape);	
 		}
+//			else {
+//				temp.add(shape);
+//				GroupShape gp = new GroupShape(temp);
+				
+			
 		shapeList.addAll(temp);
 		
-		//System.out.println("ShapeList size " + shapeList.size());
+		System.out.println("ShapeList size in Paste run " + shapeList.size());
 
 		for (IShape shape: shapeList) {
-		
+			
 			paintCanvas.getInstance().repaint();
 		}
 		copiedShapeList.clearList();
@@ -51,7 +57,7 @@ public class PasteShape implements IUndoable {
 	
 	@Override
 	public void undo() {
-		System.out.println("Paste method undo");
+		//System.out.println("Paste method undo");
 	for (IShape shape:temp) {
 			shapeList.removeShape(shape);
 		}
