@@ -127,7 +127,7 @@ public class JPaintController implements IJPaintController {
     }
 
     private void copy() {
-    	//CopiedShape copiedShape = new CopiedShape(selectedShapeList, copiedShapeList);
+    	
     	
     	copiedShape.run();
     	

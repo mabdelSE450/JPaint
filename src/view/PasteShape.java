@@ -39,10 +39,7 @@ public class PasteShape implements IUndoable {
 			IShape newshape =  shape.paste();
 			temp.add(newshape);	
 		}
-//			else {
-//				temp.add(shape);
-//				GroupShape gp = new GroupShape(temp);
-				
+
 			
 		shapeList.addAll(temp);
 		
@@ -57,7 +54,6 @@ public class PasteShape implements IUndoable {
 	
 	@Override
 	public void undo() {
-		//System.out.println("Paste method undo");
 	for (IShape shape:temp) {
 			shapeList.removeShape(shape);
 		}

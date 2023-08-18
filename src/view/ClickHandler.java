@@ -57,31 +57,20 @@ public class ClickHandler extends MouseAdapter{
 		case("DRAW"):
 		CreateShape createShape = new CreateShape(paintCanvas, shapeList, cmd);
 		createShape.run(startPoint, endPoint, appState);
-		//undoStack.clearList();
-		//redoStack.clearList();
+	
 		
 		break;
 		case("SELECT"):	
-			//System.out.println("SelectedShapeList size in clickHandler " + selectedShapeList.getSize());
-		
 			ArrayList<IShape> temp = new ArrayList<IShape>();
 		SelectShape boundingBoxShape = new SelectShape(paintCanvas);
 		boundingBoxShape.run(selectedShapeList,startPoint, endPoint);
-		//System.out.println("SelectedShapeList size in clickHandler " + selectedShapeList.getSize());
-		//System.out.println("SHapeList size in clickHandler " + shapeList.size());
-		//for (JShape shape : shapeList) {
 		for(IShape shape: shapeList) {
 			
             if (boundingBoxShape.checkCollision(shape)) {
             	temp.add(shape);
-            	//undoStack.clearList();
-            	//redoStack.clearList();
             	}
             }
 		selectedShapeList.addAll(temp);
-		//System.out.println("SelectedShapeList size in ClickHandler " + selectedShapeList.getSize());
-		//groupShapeSelectedShapeList.addAll(temp);
-		
 		break;
 		case("MOVE"):
 			

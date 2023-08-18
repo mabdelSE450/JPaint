@@ -23,7 +23,6 @@ public class SelectShape {
 	 
 	 public SelectShape(PaintCanvas paintCanvas) {
 		 this.paintCanvas = paintCanvas;
-		// this.createGroupShape = createGroupShape
 		 
 	 }
 	 
@@ -80,7 +79,7 @@ public class SelectShape {
 	    	int newWidth = shape.getWidth() +6 ;
 			
 			graphics2d = (Graphics2D) paintCanvas.getGraphics();
-			//System.out.println("Graphics2d hash code " + graphics2d.hashCode());
+			
 			Stroke stroke = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[]{9}, 0);
 	        graphics2d.setStroke(stroke);
 	        graphics2d.setColor(Color.BLACK);
@@ -128,15 +127,7 @@ public class SelectShape {
 	    			}
 	        }
 	        else if(shape.getShapeType().toString().equals("TRIANGLE")) {
-//	        	int[] x  = new int[3];
-//	    		x[0] = shape.startPoint.x - 3;
-//	    		x[1] = shape.endPoint.x + 10;
-//	    		x[2] = shape.startPoint.x - 3;
-//	    		int[] y = new int [3];
-//	    		y[0] = shape.startPoint.y - 6;
-//	    		y[1] = shape.endPoint.y + 3;
-//	    		y[2] = shape.endPoint.y + 3;
-//	    		int nInts = 3;
+
 	        	int[] x  = new int[3];
 	    		x[0] = shape.getStartPoint().x - 3;
 	    		x[1] = shape.getEndPoint().x + 10;
