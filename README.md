@@ -5,3 +5,6 @@ able to be copied, moved, pasted, and deleted with the expected outcome. Grouped
 
 GitHub Repo Link:
 https://github.com/mabdelSE450/JPaint
+
+# Program Interface
+![Screenshot (184)](https://github.com/mabdelsPROJECTS/JPaint/assets/137844707/a081165c-743e-4ab8-b31d-9c8b42396dda)
