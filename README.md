@@ -12,7 +12,7 @@ https://github.com/mabdelSE450/JPaint
 # Drawing Shapes
 ![Screenshot (185)](https://github.com/mabdelsPROJECTS/JPaint/assets/137844707/2d4f9674-c551-4537-8d29-d125ef996c98)
 
-# Undoing an Drawn Shape
+# Undoing a Drawn Shape
 ![Screenshot (186)](https://github.com/mabdelsPROJECTS/JPaint/assets/137844707/b4f96670-02b2-4299-b24f-a3233d159006)
 
 # Selecting a Shape
